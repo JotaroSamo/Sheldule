@@ -12,11 +12,11 @@ namespace Sheldule.Application
 {
     public class ClassroomService : Repo<Classroom>
     {
-        private readonly SchelduleContext _context;
+        private readonly SchelduleContext _context = new SchelduleContext();
 
-        public ClassroomService(SchelduleContext context)
+        public ClassroomService()
         {
-            _context = context;
+           
         }
 
         public async Task<Classroom> Create(Classroom entity)

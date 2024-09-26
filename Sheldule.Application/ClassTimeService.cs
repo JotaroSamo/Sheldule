@@ -7,11 +7,11 @@ namespace Sheldule.Application;
 
 public class ClassTimeService : Repo<ClassTime>
 {
-    private readonly SchelduleContext _context;
+    private readonly SchelduleContext _context = new SchelduleContext();
 
-    public ClassTimeService(SchelduleContext context)
+    public ClassTimeService()
     {
-        _context = context;
+      
     }
 
     public async Task<ClassTime> Create(ClassTime entity)

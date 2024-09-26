@@ -7,7 +7,7 @@ using Sheldule.DataAccess.Enums;
 
 namespace Sheldule.DataAccess.Model
 {
-    public class Scheldule
+    public class Schedule
     {
         public int Id { get; set; }
         public int GroupId { get; set; }

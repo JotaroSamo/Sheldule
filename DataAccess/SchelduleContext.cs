@@ -16,7 +16,7 @@ public class SchelduleContext: DbContext
     }
     public DbSet<Classroom> Classrooms { get; set; }
     public DbSet<ClassTime> ClassTimes { get; set; }
-    public DbSet<Scheldule> Scheldules { get; set; }
+    public DbSet<Schedule> Schedules { get; set; }
     public DbSet<StudentGroup> StudentGroups { get; set; }
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<Teacher> Teachers { get; set; }

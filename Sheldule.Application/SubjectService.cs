@@ -13,18 +13,22 @@ namespace Sheldule.Application
 {
     public class SubjectService : Repo<Subject>
     {
-        private readonly SchelduleContext _schelduleContext;
+        private readonly SchelduleContext _context = new SchelduleContext();
 
-        public SubjectService(SchelduleContext schelduleContext )
+        public SubjectService()
         {
-            _schelduleContext = schelduleContext;
+
+        }
+        public async Task<List<Subject>> SearchByName(string name)
+        {
+            return _context.Subjects.Where(x => x.Name.Contains(name)).ToList();
         }
         public async Task<Subject> Create(Subject entity)
         {
             if (entity is not null)
             {
-                await _schelduleContext.Subjects.AddAsync(entity);
-                await _schelduleContext.SaveChangesAsync();
+                await _context.Subjects.AddAsync(entity);
+                await _context.SaveChangesAsync();
                 return entity;
             }
 
@@ -33,32 +37,32 @@ namespace Sheldule.Application
 
         public async Task Delete(Subject entity)
         {
-            var subject = await _schelduleContext.Subjects.FindAsync(entity.Id);
+            var subject = await _context.Subjects.FindAsync(entity.Id);
             if (subject != null) 
             {
-                _schelduleContext.Subjects.Remove(subject);
-                await _schelduleContext.SaveChangesAsync();
+                _context.Subjects.Remove(subject);
+                await _context.SaveChangesAsync();
             }
 
         }
 
         public async Task<Subject> GetById(Subject entity)
         {
-            return await _schelduleContext.Subjects.FindAsync(entity.Id);
+            return await _context.Subjects.FindAsync(entity.Id);
         }
 
         public async Task<List<Subject>> GetList()
         {
-            return await _schelduleContext.Subjects.ToListAsync();
+            return await _context.Subjects.ToListAsync();
         }
 
         public async Task<Subject> Update(Subject entity)
         {
-            var subject = await _schelduleContext.Subjects.FindAsync(entity.Id);
+            var subject = await _context.Subjects.FindAsync(entity.Id);
             if (subject != null)
             {
                 subject.Name = entity.Name;
-                await _schelduleContext.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             return subject;
         }

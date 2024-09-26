@@ -6,5 +6,9 @@ namespace SheldulePro
         {
             InitializeComponent();
         }
+        private void SubjectToolStrip_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
