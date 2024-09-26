@@ -20,10 +20,15 @@ public class ClassTimeService : Repo<ClassTime>
         await _context.SaveChangesAsync();
         return entity;
     }
-
+    public async Task<List<ClassTime>> Search(int num)
+    {
+        return await _context.ClassTimes.Where(i=>i.Number == num).ToListAsync();
+    }
     public async Task Delete(ClassTime entity)
     {
-        _context.ClassTimes.Remove(entity);
+        var classtime = _context.ClassTimes.Find(entity.Id);
+
+        _context.ClassTimes.Remove(classtime);
         await _context.SaveChangesAsync();
     }
 

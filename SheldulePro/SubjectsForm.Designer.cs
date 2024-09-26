@@ -28,32 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            SubjectGrid = new DataGridView();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            SubjectsGrid = new DataGridView();
             NewSubjectText = new TextBox();
-            SearxhText = new TextBox();
+            SearchText = new TextBox();
             UpdateSubjectText = new TextBox();
             NewSubjectBtn = new Button();
             UpdateSubjectBtn = new Button();
-            Id = new DataGridViewTextBoxColumn();
-            Name = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)SubjectGrid).BeginInit();
+            DeleteSubjectbtn = new Button();
+            ((System.ComponentModel.ISupportInitialize)SubjectsGrid).BeginInit();
             SuspendLayout();
             // 
-            // SubjectGrid
+            // SubjectsGrid
             // 
-            dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 255, 192);
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            SubjectGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            SubjectGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            SubjectGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            SubjectGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SubjectGrid.Columns.AddRange(new DataGridViewColumn[] { Id, Name });
-            SubjectGrid.Location = new Point(12, 55);
-            SubjectGrid.Name = "SubjectGrid";
-            SubjectGrid.Size = new Size(631, 653);
-            SubjectGrid.TabIndex = 0;
+            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 255, 192);
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            SubjectsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            SubjectsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            SubjectsGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            SubjectsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            SubjectsGrid.Location = new Point(12, 55);
+            SubjectsGrid.Name = "SubjectsGrid";
+            SubjectsGrid.Size = new Size(631, 653);
+            SubjectsGrid.TabIndex = 0;
+            SubjectsGrid.SelectionChanged += SubjectsGrid_SelectionChanged;
             // 
             // NewSubjectText
             // 
@@ -62,13 +61,13 @@
             NewSubjectText.Size = new Size(550, 23);
             NewSubjectText.TabIndex = 1;
             // 
-            // SearxhText
+            // SearchText
             // 
-            SearxhText.Location = new Point(12, 26);
-            SearxhText.Name = "SearxhText";
-            SearxhText.Size = new Size(631, 23);
-            SearxhText.TabIndex = 2;
-            SearxhText.TextChanged += SearxhText_TextChanged;
+            SearchText.Location = new Point(12, 26);
+            SearchText.Name = "SearchText";
+            SearchText.Size = new Size(631, 23);
+            SearchText.TabIndex = 2;
+            SearchText.TextChanged += SearxhText_TextChanged;
             // 
             // UpdateSubjectText
             // 
@@ -85,6 +84,7 @@
             NewSubjectBtn.TabIndex = 4;
             NewSubjectBtn.Text = "Добавить";
             NewSubjectBtn.UseVisualStyleBackColor = true;
+            NewSubjectBtn.Click += NewSubjectBtn_Click;
             // 
             // UpdateSubjectBtn
             // 
@@ -94,48 +94,45 @@
             UpdateSubjectBtn.TabIndex = 5;
             UpdateSubjectBtn.Text = "Изменить";
             UpdateSubjectBtn.UseVisualStyleBackColor = true;
+            UpdateSubjectBtn.Click += UpdateSubjectBtn_Click;
             // 
-            // Id
+            // DeleteSubjectbtn
             // 
-            Id.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Id.FillWeight = 152.284271F;
-            Id.HeaderText = "ID";
-            Id.Name = "Id";
-            Id.Width = 240;
-            // 
-            // Name
-            // 
-            Name.FillWeight = 47.71573F;
-            Name.HeaderText = "Предмет";
-            Name.Name = "Name";
+            DeleteSubjectbtn.Location = new Point(649, 415);
+            DeleteSubjectbtn.Name = "DeleteSubjectbtn";
+            DeleteSubjectbtn.Size = new Size(550, 23);
+            DeleteSubjectbtn.TabIndex = 6;
+            DeleteSubjectbtn.Text = "Изменить";
+            DeleteSubjectbtn.UseVisualStyleBackColor = true;
+            DeleteSubjectbtn.Click += DeleteSubjectbtn_Click;
             // 
             // SubjectForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1211, 720);
+            Controls.Add(DeleteSubjectbtn);
             Controls.Add(UpdateSubjectBtn);
             Controls.Add(NewSubjectBtn);
             Controls.Add(UpdateSubjectText);
-            Controls.Add(SearxhText);
+            Controls.Add(SearchText);
             Controls.Add(NewSubjectText);
-            Controls.Add(SubjectGrid);
-         
+            Controls.Add(SubjectsGrid);
+            Name = "SubjectForm";
             Text = "SubjectForm";
-            ((System.ComponentModel.ISupportInitialize)SubjectGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SubjectsGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView SubjectGrid;
+        private DataGridView SubjectsGrid;
         private TextBox NewSubjectText;
-        private TextBox SearxhText;
+        private TextBox SearchText;
         private TextBox UpdateSubjectText;
         private Button NewSubjectBtn;
         private Button UpdateSubjectBtn;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Name;
+        private Button DeleteSubjectbtn;
     }
 }

@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Sheldule.Application\SheldulePro.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+
 </Project>
