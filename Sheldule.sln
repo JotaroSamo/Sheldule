@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheldule", "Sheldule\Sheldule.csproj", "{807FB6B2-EA79-476D-A6BA-D08A0F56DDD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheldulePro.DataAccess", "DataAccess\SheldulePro.DataAccess.csproj", "{1637B227-63ED-4848-8CE1-0458D9E29F07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheldule.DataAccess", "DataAccess\Sheldule.DataAccess.csproj", "{1637B227-63ED-4848-8CE1-0458D9E29F07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheldulePro.Application", "Sheldule.Application\SheldulePro.Application.csproj", "{9EA304BF-82D6-43D9-8C4D-936CA1AD03E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheldule.Application", "Sheldule.Application\Sheldule.Application.csproj", "{9EA304BF-82D6-43D9-8C4D-936CA1AD03E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheldulePro", "SheldulePro\SheldulePro.csproj", "{3E123ECA-071B-4E7A-B260-6B63EA855DD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{807FB6B2-EA79-476D-A6BA-D08A0F56DDD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{807FB6B2-EA79-476D-A6BA-D08A0F56DDD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{807FB6B2-EA79-476D-A6BA-D08A0F56DDD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{807FB6B2-EA79-476D-A6BA-D08A0F56DDD6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1637B227-63ED-4848-8CE1-0458D9E29F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1637B227-63ED-4848-8CE1-0458D9E29F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1637B227-63ED-4848-8CE1-0458D9E29F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{9EA304BF-82D6-43D9-8C4D-936CA1AD03E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EA304BF-82D6-43D9-8C4D-936CA1AD03E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EA304BF-82D6-43D9-8C4D-936CA1AD03E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E123ECA-071B-4E7A-B260-6B63EA855DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E123ECA-071B-4E7A-B260-6B63EA855DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E123ECA-071B-4E7A-B260-6B63EA855DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E123ECA-071B-4E7A-B260-6B63EA855DD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

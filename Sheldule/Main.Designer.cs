@@ -32,11 +32,12 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SettingBtn = new System.Windows.Forms.ToolStripButton();
             this.DateTimeBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.SubjectBtn = new System.Windows.Forms.ToolStripButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Group = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WeekComboBox = new System.Windows.Forms.ComboBox();
             this.DayComboBox = new System.Windows.Forms.ComboBox();
+            this.TeacherBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -46,7 +47,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SettingBtn,
             this.DateTimeBtn,
-            this.toolStripButton3});
+            this.SubjectBtn,
+            this.TeacherBtn});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1386, 25);
@@ -69,13 +71,14 @@
             this.DateTimeBtn.Size = new System.Drawing.Size(99, 22);
             this.DateTimeBtn.Text = "Дата и время";
             // 
-            // toolStripButton3
+            // SubjectBtn
             // 
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(114, 22);
-            this.toolStripButton3.Text = "toolStripButton3";
+            this.SubjectBtn.Image = ((System.Drawing.Image)(resources.GetObject("SubjectBtn.Image")));
+            this.SubjectBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SubjectBtn.Name = "SubjectBtn";
+            this.SubjectBtn.Size = new System.Drawing.Size(84, 22);
+            this.SubjectBtn.Text = "Предметы";
+            this.SubjectBtn.Click += new System.EventHandler(this.SubjectBtn_Click);
             // 
             // dataGridView1
             // 
@@ -112,6 +115,14 @@
             this.DayComboBox.Size = new System.Drawing.Size(300, 21);
             this.DayComboBox.TabIndex = 9;
             // 
+            // TeacherBtn
+            // 
+            this.TeacherBtn.Image = ((System.Drawing.Image)(resources.GetObject("TeacherBtn.Image")));
+            this.TeacherBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TeacherBtn.Name = "TeacherBtn";
+            this.TeacherBtn.Size = new System.Drawing.Size(72, 22);
+            this.TeacherBtn.Text = "Учителя";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,11 +147,12 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton SettingBtn;
         private System.Windows.Forms.ToolStripButton DateTimeBtn;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton SubjectBtn;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Group;
         private System.Windows.Forms.ComboBox WeekComboBox;
         private System.Windows.Forms.ComboBox DayComboBox;
+        private System.Windows.Forms.ToolStripButton TeacherBtn;
     }
 }
 

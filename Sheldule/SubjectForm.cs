@@ -10,14 +10,15 @@ using System.Windows.Forms;
 
 namespace Sheldule
 {
-    public partial class Main : Form
+    public partial class SubjectForm : Form
     {
-        public Main()
+        SubjectService
+        public SubjectForm()
         {
             InitializeComponent();
         }
 
-        private void SubjectBtn_Click(object sender, EventArgs e)
+        private void SearchSubject_TextChanged(object sender, EventArgs e)
         {
 
         }
