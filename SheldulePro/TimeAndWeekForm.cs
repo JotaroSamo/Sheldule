@@ -24,6 +24,7 @@ namespace SheldulePro
         {
             InitializeComponent();
             LoadTime();
+            LoadWeek();
         }
         private async void LoadTime()
         {
@@ -120,6 +121,15 @@ namespace SheldulePro
                 await _timeService.Delete(time);
                 LoadTime();
             }
+        }
+        public async void LoadWeek()
+        {
+            var weeks = _weekService.GetList();
+            WeekGrid.DataSource = weeks;
+        }
+        private void NewWeekBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             TimeGrid = new DataGridView();
-            dataGridView2 = new DataGridView();
+            WeekGrid = new DataGridView();
             NewStartTimePicker = new DateTimePicker();
             NewEndTimePicker = new DateTimePicker();
             UpdateEndTimePicker = new DateTimePicker();
             UpdateStartTimePicker = new DateTimePicker();
             SearchTimeText = new TextBox();
-            textBox4 = new TextBox();
+            SearchWeekText = new TextBox();
             NewTimeBtn = new Button();
             UpdateTimeBtn = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            dateTimePicker5 = new DateTimePicker();
-            dateTimePicker6 = new DateTimePicker();
-            textBox5 = new TextBox();
-            dateTimePicker7 = new DateTimePicker();
-            dateTimePicker8 = new DateTimePicker();
-            textBox6 = new TextBox();
+            UpdateWeekBtn = new Button();
+            NewWeekBtn = new Button();
+            UpdateWeekEndPicker = new DateTimePicker();
+            UpdateWeekStartPicker = new DateTimePicker();
+            UpdateNAmeWeekText = new TextBox();
+            NewWeekEndPicker = new DateTimePicker();
+            NewWeekStartPicker = new DateTimePicker();
+            NewNameWeekText = new TextBox();
             DeleteTimeBtn = new Button();
-            button2 = new Button();
+            DeleteWeekBtn = new Button();
             NewTimeText = new MaskedTextBox();
             UpdateTimeText = new MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)TimeGrid).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)WeekGrid).BeginInit();
             SuspendLayout();
             // 
             // TimeGrid
@@ -64,13 +64,13 @@
             TimeGrid.TabIndex = 0;
             TimeGrid.SelectionChanged += TimeGrid_SelectionChanged;
             // 
-            // dataGridView2
+            // WeekGrid
             // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(536, 35);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(329, 577);
-            dataGridView2.TabIndex = 1;
+            WeekGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            WeekGrid.Location = new Point(536, 35);
+            WeekGrid.Name = "WeekGrid";
+            WeekGrid.Size = new Size(329, 577);
+            WeekGrid.TabIndex = 1;
             // 
             // NewStartTimePicker
             // 
@@ -116,12 +116,12 @@
             SearchTimeText.TabIndex = 8;
             SearchTimeText.TextChanged += SearchTimeText_TextChanged;
             // 
-            // textBox4
+            // SearchWeekText
             // 
-            textBox4.Location = new Point(536, 6);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(329, 23);
-            textBox4.TabIndex = 9;
+            SearchWeekText.Location = new Point(536, 6);
+            SearchWeekText.Name = "SearchWeekText";
+            SearchWeekText.Size = new Size(329, 23);
+            SearchWeekText.TabIndex = 9;
             // 
             // NewTimeBtn
             // 
@@ -143,73 +143,74 @@
             UpdateTimeBtn.UseVisualStyleBackColor = true;
             UpdateTimeBtn.Click += UpdateTimeBtn_Click;
             // 
-            // button3
+            // UpdateWeekBtn
             // 
-            button3.Location = new Point(871, 461);
-            button3.Name = "button3";
-            button3.Size = new Size(226, 23);
-            button3.TabIndex = 19;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            UpdateWeekBtn.Location = new Point(871, 461);
+            UpdateWeekBtn.Name = "UpdateWeekBtn";
+            UpdateWeekBtn.Size = new Size(226, 23);
+            UpdateWeekBtn.TabIndex = 19;
+            UpdateWeekBtn.Text = "Обновить";
+            UpdateWeekBtn.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // NewWeekBtn
             // 
-            button4.Location = new Point(871, 187);
-            button4.Name = "button4";
-            button4.Size = new Size(226, 23);
-            button4.TabIndex = 18;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            NewWeekBtn.Location = new Point(871, 187);
+            NewWeekBtn.Name = "NewWeekBtn";
+            NewWeekBtn.Size = new Size(226, 23);
+            NewWeekBtn.TabIndex = 18;
+            NewWeekBtn.Text = "Добавить";
+            NewWeekBtn.UseVisualStyleBackColor = true;
+            NewWeekBtn.Click += NewWeekBtn_Click;
             // 
-            // dateTimePicker5
+            // UpdateWeekEndPicker
             // 
-            dateTimePicker5.Format = DateTimePickerFormat.Short;
-            dateTimePicker5.Location = new Point(871, 417);
-            dateTimePicker5.Name = "dateTimePicker5";
-            dateTimePicker5.Size = new Size(226, 23);
-            dateTimePicker5.TabIndex = 17;
-            dateTimePicker5.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
+            UpdateWeekEndPicker.Format = DateTimePickerFormat.Short;
+            UpdateWeekEndPicker.Location = new Point(871, 417);
+            UpdateWeekEndPicker.Name = "UpdateWeekEndPicker";
+            UpdateWeekEndPicker.Size = new Size(226, 23);
+            UpdateWeekEndPicker.TabIndex = 17;
+            UpdateWeekEndPicker.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
             // 
-            // dateTimePicker6
+            // UpdateWeekStartPicker
             // 
-            dateTimePicker6.Format = DateTimePickerFormat.Short;
-            dateTimePicker6.Location = new Point(871, 366);
-            dateTimePicker6.Name = "dateTimePicker6";
-            dateTimePicker6.Size = new Size(226, 23);
-            dateTimePicker6.TabIndex = 16;
-            dateTimePicker6.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
+            UpdateWeekStartPicker.Format = DateTimePickerFormat.Short;
+            UpdateWeekStartPicker.Location = new Point(871, 366);
+            UpdateWeekStartPicker.Name = "UpdateWeekStartPicker";
+            UpdateWeekStartPicker.Size = new Size(226, 23);
+            UpdateWeekStartPicker.TabIndex = 16;
+            UpdateWeekStartPicker.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
             // 
-            // textBox5
+            // UpdateNAmeWeekText
             // 
-            textBox5.Location = new Point(871, 314);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(226, 23);
-            textBox5.TabIndex = 15;
+            UpdateNAmeWeekText.Location = new Point(871, 314);
+            UpdateNAmeWeekText.Name = "UpdateNAmeWeekText";
+            UpdateNAmeWeekText.Size = new Size(226, 23);
+            UpdateNAmeWeekText.TabIndex = 15;
             // 
-            // dateTimePicker7
+            // NewWeekEndPicker
             // 
-            dateTimePicker7.Format = DateTimePickerFormat.Short;
-            dateTimePicker7.Location = new Point(871, 138);
-            dateTimePicker7.Name = "dateTimePicker7";
-            dateTimePicker7.Size = new Size(226, 23);
-            dateTimePicker7.TabIndex = 14;
-            dateTimePicker7.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
+            NewWeekEndPicker.Format = DateTimePickerFormat.Short;
+            NewWeekEndPicker.Location = new Point(871, 138);
+            NewWeekEndPicker.Name = "NewWeekEndPicker";
+            NewWeekEndPicker.Size = new Size(226, 23);
+            NewWeekEndPicker.TabIndex = 14;
+            NewWeekEndPicker.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
             // 
-            // dateTimePicker8
+            // NewWeekStartPicker
             // 
-            dateTimePicker8.Format = DateTimePickerFormat.Short;
-            dateTimePicker8.Location = new Point(871, 87);
-            dateTimePicker8.Name = "dateTimePicker8";
-            dateTimePicker8.Size = new Size(226, 23);
-            dateTimePicker8.TabIndex = 13;
-            dateTimePicker8.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
+            NewWeekStartPicker.Format = DateTimePickerFormat.Short;
+            NewWeekStartPicker.Location = new Point(871, 87);
+            NewWeekStartPicker.Name = "NewWeekStartPicker";
+            NewWeekStartPicker.Size = new Size(226, 23);
+            NewWeekStartPicker.TabIndex = 13;
+            NewWeekStartPicker.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
             // 
-            // textBox6
+            // NewNameWeekText
             // 
-            textBox6.Location = new Point(871, 35);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(226, 23);
-            textBox6.TabIndex = 12;
+            NewNameWeekText.Location = new Point(871, 35);
+            NewNameWeekText.Name = "NewNameWeekText";
+            NewNameWeekText.Size = new Size(226, 23);
+            NewNameWeekText.TabIndex = 12;
             // 
             // DeleteTimeBtn
             // 
@@ -221,14 +222,14 @@
             DeleteTimeBtn.UseVisualStyleBackColor = true;
             DeleteTimeBtn.Click += DeleteTimeBtn_Click;
             // 
-            // button2
+            // DeleteWeekBtn
             // 
-            button2.Location = new Point(871, 589);
-            button2.Name = "button2";
-            button2.Size = new Size(226, 23);
-            button2.TabIndex = 21;
-            button2.Text = "Удалить";
-            button2.UseVisualStyleBackColor = true;
+            DeleteWeekBtn.Location = new Point(871, 589);
+            DeleteWeekBtn.Name = "DeleteWeekBtn";
+            DeleteWeekBtn.Size = new Size(226, 23);
+            DeleteWeekBtn.TabIndex = 21;
+            DeleteWeekBtn.Text = "Удалить";
+            DeleteWeekBtn.UseVisualStyleBackColor = true;
             // 
             // NewTimeText
             // 
@@ -255,30 +256,30 @@
             ClientSize = new Size(1160, 624);
             Controls.Add(UpdateTimeText);
             Controls.Add(NewTimeText);
-            Controls.Add(button2);
+            Controls.Add(DeleteWeekBtn);
             Controls.Add(DeleteTimeBtn);
-            Controls.Add(button3);
-            Controls.Add(button4);
-            Controls.Add(dateTimePicker5);
-            Controls.Add(dateTimePicker6);
-            Controls.Add(textBox5);
-            Controls.Add(dateTimePicker7);
-            Controls.Add(dateTimePicker8);
-            Controls.Add(textBox6);
+            Controls.Add(UpdateWeekBtn);
+            Controls.Add(NewWeekBtn);
+            Controls.Add(UpdateWeekEndPicker);
+            Controls.Add(UpdateWeekStartPicker);
+            Controls.Add(UpdateNAmeWeekText);
+            Controls.Add(NewWeekEndPicker);
+            Controls.Add(NewWeekStartPicker);
+            Controls.Add(NewNameWeekText);
             Controls.Add(UpdateTimeBtn);
             Controls.Add(NewTimeBtn);
-            Controls.Add(textBox4);
+            Controls.Add(SearchWeekText);
             Controls.Add(SearchTimeText);
             Controls.Add(UpdateEndTimePicker);
             Controls.Add(UpdateStartTimePicker);
             Controls.Add(NewEndTimePicker);
             Controls.Add(NewStartTimePicker);
-            Controls.Add(dataGridView2);
+            Controls.Add(WeekGrid);
             Controls.Add(TimeGrid);
             Name = "TimeAndWeekForm";
             Text = "TimeAndWeekForm";
             ((System.ComponentModel.ISupportInitialize)TimeGrid).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)WeekGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -286,25 +287,25 @@
         #endregion
 
         private DataGridView TimeGrid;
-        private DataGridView dataGridView2;
+        private DataGridView WeekGrid;
         private DateTimePicker NewStartTimePicker;
         private DateTimePicker NewEndTimePicker;
         private DateTimePicker UpdateEndTimePicker;
         private DateTimePicker UpdateStartTimePicker;
         private TextBox SearchTimeText;
-        private TextBox textBox4;
+        private TextBox SearchWeekText;
         private Button NewTimeBtn;
         private Button UpdateTimeBtn;
-        private Button button3;
-        private Button button4;
-        private DateTimePicker dateTimePicker5;
-        private DateTimePicker dateTimePicker6;
-        private TextBox textBox5;
-        private DateTimePicker dateTimePicker7;
-        private DateTimePicker dateTimePicker8;
-        private TextBox textBox6;
+        private Button UpdateWeekBtn;
+        private Button NewWeekBtn;
+        private DateTimePicker UpdateWeekEndPicker;
+        private DateTimePicker UpdateWeekStartPicker;
+        private TextBox UpdateNAmeWeekText;
+        private DateTimePicker NewWeekEndPicker;
+        private DateTimePicker NewWeekStartPicker;
+        private TextBox NewNameWeekText;
         private Button DeleteTimeBtn;
-        private Button button2;
+        private Button DeleteWeekBtn;
         private MaskedTextBox NewTimeText;
         private MaskedTextBox UpdateTimeText;
     }
