@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 namespace SheldulePro.Application
 {
@@ -16,6 +17,13 @@ namespace SheldulePro.Application
 
         public WeekService()
         {
+        }
+
+        public async Task<List<Week>> Search(int num)
+        {
+          
+            return await _context.Weeks.Where(i => i.Number == num).ToListAsync();
+            
         }
 
         // Создание новой недели

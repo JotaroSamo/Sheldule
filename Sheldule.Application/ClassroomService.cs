@@ -18,7 +18,15 @@ namespace Sheldule.Application
         {
            
         }
+        public async Task<List<Classroom>> Search(string name)
+        {
 
+            return await _context.Classrooms
+                                         .Where(i => i.Number.Contains(name) || i.Type.Contains(name))
+                                         .ToListAsync();
+
+
+        }
         public async Task<Classroom> Create(Classroom entity)
         {
             await _context.Classrooms.AddAsync(entity);

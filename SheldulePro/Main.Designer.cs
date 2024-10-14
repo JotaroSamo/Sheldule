@@ -31,28 +31,22 @@ namespace SheldulePro
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             toolStrip1 = new ToolStrip();
-            toolStripButton3 = new ToolStripButton();
             TimeAndWeekBtn = new ToolStripButton();
             SubjectToolStrip = new ToolStripButton();
+            toolStripButton3 = new ToolStripButton();
+            toolStripButton1 = new ToolStripButton();
+            toolStripButton2 = new ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton3, TimeAndWeekBtn, SubjectToolStrip });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { TimeAndWeekBtn, SubjectToolStrip, toolStripButton3, toolStripButton1, toolStripButton2 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1209, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton3
-            // 
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(114, 22);
-            toolStripButton3.Text = "toolStripButton1";
             // 
             // TimeAndWeekBtn
             // 
@@ -71,6 +65,32 @@ namespace SheldulePro
             SubjectToolStrip.Size = new Size(84, 22);
             SubjectToolStrip.Text = "Предметы";
             SubjectToolStrip.Click += SubjectToolStrip_Click;
+            // 
+            // toolStripButton3
+            // 
+            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
+            toolStripButton3.ImageTransparentColor = Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new Size(72, 22);
+            toolStripButton3.Text = "Учителя";
+            toolStripButton3.Click += toolStripButton3_Click;
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(69, 22);
+            toolStripButton1.Text = "Группы";
+            toolStripButton1.Click += toolStripButton1_Click;
+            // 
+            // toolStripButton2
+            // 
+            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
+            toolStripButton2.ImageTransparentColor = Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new Size(81, 22);
+            toolStripButton2.Text = "Кабинеты";
             // 
             // Main
             // 
@@ -94,5 +114,7 @@ namespace SheldulePro
         private ToolStripButton toolStripButton3;
         private ToolStripButton TimeAndWeekBtn;
         private ToolStripButton SubjectToolStrip;
+        private ToolStripButton toolStripButton1;
+        private ToolStripButton toolStripButton2;
     }
 }

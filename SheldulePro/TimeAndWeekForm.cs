@@ -19,7 +19,7 @@ namespace SheldulePro
         private readonly ClassTimeService _timeService = new ClassTimeService();
         private readonly WeekService _weekService = new WeekService();
         private int SelectTimeID = 0;
-
+        private int SelectWeekID = 0;
         public TimeAndWeekForm()
         {
             InitializeComponent();
@@ -124,12 +124,98 @@ namespace SheldulePro
         }
         public async void LoadWeek()
         {
-            var weeks = _weekService.GetList();
+            var weeks = await _weekService.GetList();
             WeekGrid.DataSource = weeks;
         }
-        private void NewWeekBtn_Click(object sender, EventArgs e)
+        private async void NewWeekBtn_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(NewNameWeekText.Text))
+            {
+                var week = new Week
+                {
+                    Number = int.Parse(NewNameWeekText.Text),
+                    StartDate = NewWeekStartPicker.Value.Date,
+                    EndDate = NewWeekEndPicker.Value.Date
+                };
+                await _weekService.Create(week);
+                LoadWeek();
 
+            }
+        }
+
+        private async void UpdateWeekBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(UpdateNameWeekText.Text))
+            {
+                var week = new Week
+                {
+                    Id = SelectWeekID,
+                    Number = int.Parse(UpdateNameWeekText.Text),
+                    StartDate = UpdateWeekStartPicker.Value.Date,
+                    EndDate = UpdateWeekEndPicker.Value.Date
+
+                };
+                await _weekService.Update(week);
+                LoadWeek();
+            }
+        }
+
+        private void WeekGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            if (WeekGrid.CurrentRow != null)
+            {
+                // Получаем значения из текущей строки
+                try
+                {
+                    SelectWeekID = int.Parse(WeekGrid.CurrentRow.Cells["Id"].Value?.ToString());
+                }
+                catch (Exception)
+                {
+
+                    SelectWeekID = 0;
+                }
+
+
+                UpdateNameWeekText.Text = WeekGrid.CurrentRow.Cells["Number"].Value?.ToString();
+                UpdateWeekStartPicker.Value = DateTime.Parse(WeekGrid.CurrentRow.Cells["StartDate"].Value?.ToString());
+                UpdateWeekEndPicker.Value = DateTime.Parse(WeekGrid.CurrentRow.Cells["EndDate"].Value?.ToString());
+            }
+        }
+
+        private async void DeleteWeekBtn_Click(object sender, EventArgs e)
+        {
+            if (SelectWeekID != 0)
+            {
+                var week = new Week
+                {
+                    Id = SelectWeekID
+
+                };
+                await _weekService.Delete(week);
+                LoadWeek();
+            }
+        }
+
+        private async void SearchWeekText_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(SearchWeekText.Text))
+            {
+                try
+                {
+                    var num = int.Parse(SearchWeekText.Text);
+                    WeekGrid.DataSource = await _weekService.Search(num);
+                }
+                catch (Exception)
+                {
+                    LoadTime();
+                }
+
+
+            }
+            else
+            {
+                LoadTime();
+            }
         }
     }
 }

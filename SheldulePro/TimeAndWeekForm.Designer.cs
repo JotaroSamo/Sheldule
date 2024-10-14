@@ -42,14 +42,14 @@
             NewWeekBtn = new Button();
             UpdateWeekEndPicker = new DateTimePicker();
             UpdateWeekStartPicker = new DateTimePicker();
-            UpdateNAmeWeekText = new TextBox();
             NewWeekEndPicker = new DateTimePicker();
             NewWeekStartPicker = new DateTimePicker();
-            NewNameWeekText = new TextBox();
             DeleteTimeBtn = new Button();
             DeleteWeekBtn = new Button();
             NewTimeText = new MaskedTextBox();
             UpdateTimeText = new MaskedTextBox();
+            NewNameWeekText = new MaskedTextBox();
+            UpdateNameWeekText = new MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)TimeGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)WeekGrid).BeginInit();
             SuspendLayout();
@@ -66,11 +66,13 @@
             // 
             // WeekGrid
             // 
+            WeekGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             WeekGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             WeekGrid.Location = new Point(536, 35);
             WeekGrid.Name = "WeekGrid";
             WeekGrid.Size = new Size(329, 577);
             WeekGrid.TabIndex = 1;
+            WeekGrid.SelectionChanged += WeekGrid_SelectionChanged;
             // 
             // NewStartTimePicker
             // 
@@ -122,6 +124,7 @@
             SearchWeekText.Name = "SearchWeekText";
             SearchWeekText.Size = new Size(329, 23);
             SearchWeekText.TabIndex = 9;
+            SearchWeekText.TextChanged += SearchWeekText_TextChanged;
             // 
             // NewTimeBtn
             // 
@@ -151,6 +154,7 @@
             UpdateWeekBtn.TabIndex = 19;
             UpdateWeekBtn.Text = "Обновить";
             UpdateWeekBtn.UseVisualStyleBackColor = true;
+            UpdateWeekBtn.Click += UpdateWeekBtn_Click;
             // 
             // NewWeekBtn
             // 
@@ -180,13 +184,6 @@
             UpdateWeekStartPicker.TabIndex = 16;
             UpdateWeekStartPicker.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
             // 
-            // UpdateNAmeWeekText
-            // 
-            UpdateNAmeWeekText.Location = new Point(871, 314);
-            UpdateNAmeWeekText.Name = "UpdateNAmeWeekText";
-            UpdateNAmeWeekText.Size = new Size(226, 23);
-            UpdateNAmeWeekText.TabIndex = 15;
-            // 
             // NewWeekEndPicker
             // 
             NewWeekEndPicker.Format = DateTimePickerFormat.Short;
@@ -204,13 +201,6 @@
             NewWeekStartPicker.Size = new Size(226, 23);
             NewWeekStartPicker.TabIndex = 13;
             NewWeekStartPicker.Value = new DateTime(2024, 9, 26, 15, 7, 0, 0);
-            // 
-            // NewNameWeekText
-            // 
-            NewNameWeekText.Location = new Point(871, 35);
-            NewNameWeekText.Name = "NewNameWeekText";
-            NewNameWeekText.Size = new Size(226, 23);
-            NewNameWeekText.TabIndex = 12;
             // 
             // DeleteTimeBtn
             // 
@@ -230,6 +220,7 @@
             DeleteWeekBtn.TabIndex = 21;
             DeleteWeekBtn.Text = "Удалить";
             DeleteWeekBtn.UseVisualStyleBackColor = true;
+            DeleteWeekBtn.Click += DeleteWeekBtn_Click;
             // 
             // NewTimeText
             // 
@@ -249,11 +240,31 @@
             UpdateTimeText.TabIndex = 23;
             UpdateTimeText.ValidatingType = typeof(int);
             // 
+            // NewNameWeekText
+            // 
+            NewNameWeekText.Location = new Point(871, 35);
+            NewNameWeekText.Mask = "00000";
+            NewNameWeekText.Name = "NewNameWeekText";
+            NewNameWeekText.Size = new Size(226, 23);
+            NewNameWeekText.TabIndex = 24;
+            NewNameWeekText.ValidatingType = typeof(int);
+            // 
+            // UpdateNameWeekText
+            // 
+            UpdateNameWeekText.Location = new Point(871, 314);
+            UpdateNameWeekText.Mask = "00000";
+            UpdateNameWeekText.Name = "UpdateNameWeekText";
+            UpdateNameWeekText.Size = new Size(226, 23);
+            UpdateNameWeekText.TabIndex = 25;
+            UpdateNameWeekText.ValidatingType = typeof(int);
+            // 
             // TimeAndWeekForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1160, 624);
+            Controls.Add(UpdateNameWeekText);
+            Controls.Add(NewNameWeekText);
             Controls.Add(UpdateTimeText);
             Controls.Add(NewTimeText);
             Controls.Add(DeleteWeekBtn);
@@ -262,10 +273,8 @@
             Controls.Add(NewWeekBtn);
             Controls.Add(UpdateWeekEndPicker);
             Controls.Add(UpdateWeekStartPicker);
-            Controls.Add(UpdateNAmeWeekText);
             Controls.Add(NewWeekEndPicker);
             Controls.Add(NewWeekStartPicker);
-            Controls.Add(NewNameWeekText);
             Controls.Add(UpdateTimeBtn);
             Controls.Add(NewTimeBtn);
             Controls.Add(SearchWeekText);
@@ -300,13 +309,13 @@
         private Button NewWeekBtn;
         private DateTimePicker UpdateWeekEndPicker;
         private DateTimePicker UpdateWeekStartPicker;
-        private TextBox UpdateNAmeWeekText;
         private DateTimePicker NewWeekEndPicker;
         private DateTimePicker NewWeekStartPicker;
-        private TextBox NewNameWeekText;
         private Button DeleteTimeBtn;
         private Button DeleteWeekBtn;
         private MaskedTextBox NewTimeText;
         private MaskedTextBox UpdateTimeText;
+        private MaskedTextBox NewNameWeekText;
+        private MaskedTextBox UpdateNameWeekText;
     }
 }

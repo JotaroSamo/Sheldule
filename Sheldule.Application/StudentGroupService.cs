@@ -17,7 +17,15 @@ namespace SheldulePro.Application
         public StudentGroupService()
         {
         }
+        public async Task<List<StudentGroup>> Search(string name)
+        {
 
+            return await _context.StudentGroups
+                                         .Where(i => i.Name.Contains(name))
+                                         .ToListAsync();
+
+
+        }
         // Создание новой группы студентов
         public async Task<StudentGroup> Create(StudentGroup entity)
         {

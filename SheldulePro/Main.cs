@@ -25,5 +25,25 @@ namespace SheldulePro
                 timeAndWeekForm.Close();
             }
         }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            TeachersForms teachersForms = new TeachersForms();
+            teachersForms.ShowDialog();
+            if (teachersForms.DialogResult == DialogResult.OK)
+            {
+                teachersForms.Close();
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            GroupForm groupForm = new GroupForm();
+            groupForm.ShowDialog();
+            if (groupForm.DialogResult == DialogResult.OK)
+            {
+                groupForm.Close();
+            }
+        }
     }
 }

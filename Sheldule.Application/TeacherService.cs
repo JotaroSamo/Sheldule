@@ -18,7 +18,15 @@ namespace SheldulePro.Application
         public TeacherService()
         {
         }
+        public async Task<List<Teacher>> Search(string name)
+        {
 
+            return await _context.Teachers
+                                         .Where(i => i.Name.Contains(name))
+                                         .ToListAsync();
+
+
+        }
         // Создание нового учителя
         public async Task<Teacher> Create(Teacher entity)
         {
