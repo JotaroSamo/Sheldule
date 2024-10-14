@@ -141,8 +141,9 @@ namespace SheldulePro
             Controls.Add(WeekBox);
             Controls.Add(DayBox);
             Controls.Add(toolStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
-            Text = "Form1";
+            Text = "Расписание";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

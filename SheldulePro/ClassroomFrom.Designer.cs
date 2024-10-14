@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClassroomFrom));
             RoomGrid = new DataGridView();
             SearchRoomText = new TextBox();
             NewNumberText = new TextBox();
@@ -69,7 +70,7 @@
             // 
             NewRoomBtn.Location = new Point(294, 130);
             NewRoomBtn.Name = "NewRoomBtn";
-            NewRoomBtn.Size = new Size(274, 23);
+            NewRoomBtn.Size = new Size(274, 36);
             NewRoomBtn.TabIndex = 3;
             NewRoomBtn.Text = "Добавить";
             NewRoomBtn.UseVisualStyleBackColor = true;
@@ -77,9 +78,9 @@
             // 
             // DeleteRoomBtn
             // 
-            DeleteRoomBtn.Location = new Point(294, 599);
+            DeleteRoomBtn.Location = new Point(294, 573);
             DeleteRoomBtn.Name = "DeleteRoomBtn";
-            DeleteRoomBtn.Size = new Size(274, 23);
+            DeleteRoomBtn.Size = new Size(274, 49);
             DeleteRoomBtn.TabIndex = 6;
             DeleteRoomBtn.Text = "Удалить";
             DeleteRoomBtn.UseVisualStyleBackColor = true;
@@ -103,7 +104,7 @@
             // 
             UpdateRoomBtn.Location = new Point(294, 348);
             UpdateRoomBtn.Name = "UpdateRoomBtn";
-            UpdateRoomBtn.Size = new Size(274, 23);
+            UpdateRoomBtn.Size = new Size(274, 42);
             UpdateRoomBtn.TabIndex = 9;
             UpdateRoomBtn.Text = "Обновить";
             UpdateRoomBtn.UseVisualStyleBackColor = true;
@@ -130,6 +131,7 @@
             Controls.Add(NewNumberText);
             Controls.Add(SearchRoomText);
             Controls.Add(RoomGrid);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ClassroomFrom";
             Text = "ClassroomFrom";
             ((System.ComponentModel.ISupportInitialize)RoomGrid).EndInit();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GroupForm));
             GroupGrid = new DataGridView();
             NewGroupText = new TextBox();
             NewGroupBtn = new Button();
@@ -59,7 +60,7 @@
             // 
             NewGroupBtn.Location = new Point(199, 69);
             NewGroupBtn.Name = "NewGroupBtn";
-            NewGroupBtn.Size = new Size(211, 23);
+            NewGroupBtn.Size = new Size(211, 46);
             NewGroupBtn.TabIndex = 2;
             NewGroupBtn.Text = "Добавить";
             NewGroupBtn.UseVisualStyleBackColor = true;
@@ -69,7 +70,7 @@
             // 
             UpdateGroupBtn.Location = new Point(199, 223);
             UpdateGroupBtn.Name = "UpdateGroupBtn";
-            UpdateGroupBtn.Size = new Size(211, 23);
+            UpdateGroupBtn.Size = new Size(211, 46);
             UpdateGroupBtn.TabIndex = 4;
             UpdateGroupBtn.Text = "Обновить";
             UpdateGroupBtn.UseVisualStyleBackColor = true;
@@ -84,9 +85,9 @@
             // 
             // DeleteGroupBtn
             // 
-            DeleteGroupBtn.Location = new Point(199, 415);
+            DeleteGroupBtn.Location = new Point(199, 387);
             DeleteGroupBtn.Name = "DeleteGroupBtn";
-            DeleteGroupBtn.Size = new Size(211, 23);
+            DeleteGroupBtn.Size = new Size(211, 51);
             DeleteGroupBtn.TabIndex = 5;
             DeleteGroupBtn.Text = "Удалить";
             DeleteGroupBtn.UseVisualStyleBackColor = true;
@@ -98,7 +99,7 @@
             SearchGroupText.Name = "SearchGroupText";
             SearchGroupText.Size = new Size(181, 23);
             SearchGroupText.TabIndex = 6;
-            SearchGroupText.SizeChanged += SearchGroupText_SizeChanged;
+            SearchGroupText.TextChanged += SearchGroupText_TextChanged;
             // 
             // GroupForm
             // 
@@ -112,6 +113,7 @@
             Controls.Add(NewGroupBtn);
             Controls.Add(NewGroupText);
             Controls.Add(GroupGrid);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "GroupForm";
             Text = "GroupForm";
             ((System.ComponentModel.ISupportInitialize)GroupGrid).EndInit();

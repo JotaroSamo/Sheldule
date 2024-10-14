@@ -19,6 +19,8 @@ namespace SheldulePro
         public GroupForm()
         {
             InitializeComponent();
+            Style.ApplyGlobalStyles(this.Controls);
+            Style.ApplyFormBackground(this);
             LoadGroup();
         }
         private async void LoadGroup()
@@ -89,14 +91,15 @@ namespace SheldulePro
             }
         }
 
-        private async void SearchGroupText_SizeChanged(object sender, EventArgs e)
+        
+        private async void SearchGroupText_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(SearchGroupText.Text))
             {
                 try
                 {
 
-                   GroupGrid.DataSource = await _studentGroupService.Search(SearchGroupText.Text);
+                    GroupGrid.DataSource = await _studentGroupService.Search(SearchGroupText.Text);
                 }
                 catch (Exception)
                 {

@@ -16,6 +16,8 @@ namespace SheldulePro
             InitializeComponent();
             string[] daysOfWeek = { "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота" };
             DayBox.DataSource = daysOfWeek;
+            Style.ApplyGlobalStyles(this.Controls);
+            Style.ApplyFormBackground(this);
             Load();
            
         }
@@ -24,8 +26,8 @@ namespace SheldulePro
             WeekBox.DataSource = await _weekService.GetList();
             WeekBox.DisplayMember = "Number"; // Отображаем номер недели
             WeekBox.ValueMember = "Id"; // Значение - идентификатор недели
-            WeekBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            WeekBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //WeekBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //WeekBox.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         #region toolbarbtn

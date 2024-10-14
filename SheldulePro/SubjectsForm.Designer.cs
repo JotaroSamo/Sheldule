@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SubjectForm));
             SubjectsGrid = new DataGridView();
             NewSubjectText = new TextBox();
             SearchText = new TextBox();
@@ -41,10 +42,10 @@
             // 
             // SubjectsGrid
             // 
-            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 255, 192);
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            SubjectsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 255, 192);
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            SubjectsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             SubjectsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             SubjectsGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             SubjectsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -80,7 +81,7 @@
             // 
             NewSubjectBtn.Location = new Point(649, 96);
             NewSubjectBtn.Name = "NewSubjectBtn";
-            NewSubjectBtn.Size = new Size(550, 23);
+            NewSubjectBtn.Size = new Size(550, 43);
             NewSubjectBtn.TabIndex = 4;
             NewSubjectBtn.Text = "Добавить";
             NewSubjectBtn.UseVisualStyleBackColor = true;
@@ -88,9 +89,9 @@
             // 
             // UpdateSubjectBtn
             // 
-            UpdateSubjectBtn.Location = new Point(649, 374);
+            UpdateSubjectBtn.Location = new Point(649, 356);
             UpdateSubjectBtn.Name = "UpdateSubjectBtn";
-            UpdateSubjectBtn.Size = new Size(550, 23);
+            UpdateSubjectBtn.Size = new Size(550, 41);
             UpdateSubjectBtn.TabIndex = 5;
             UpdateSubjectBtn.Text = "Изменить";
             UpdateSubjectBtn.UseVisualStyleBackColor = true;
@@ -100,9 +101,9 @@
             // 
             DeleteSubjectbtn.Location = new Point(649, 415);
             DeleteSubjectbtn.Name = "DeleteSubjectbtn";
-            DeleteSubjectbtn.Size = new Size(550, 23);
+            DeleteSubjectbtn.Size = new Size(550, 42);
             DeleteSubjectbtn.TabIndex = 6;
-            DeleteSubjectbtn.Text = "Изменить";
+            DeleteSubjectbtn.Text = "Удалить";
             DeleteSubjectbtn.UseVisualStyleBackColor = true;
             DeleteSubjectbtn.Click += DeleteSubjectbtn_Click;
             // 
@@ -118,6 +119,7 @@
             Controls.Add(SearchText);
             Controls.Add(NewSubjectText);
             Controls.Add(SubjectsGrid);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SubjectForm";
             Text = "SubjectForm";
             ((System.ComponentModel.ISupportInitialize)SubjectsGrid).EndInit();

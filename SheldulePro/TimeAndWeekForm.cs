@@ -23,6 +23,8 @@ namespace SheldulePro
         public TimeAndWeekForm()
         {
             InitializeComponent();
+            Style.ApplyGlobalStyles(this.Controls);
+            Style.ApplyFormBackground(this);
             LoadTime();
             LoadWeek();
         }

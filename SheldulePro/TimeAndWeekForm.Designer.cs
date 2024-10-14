@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimeAndWeekForm));
             TimeGrid = new DataGridView();
             WeekGrid = new DataGridView();
             NewStartTimePicker = new DateTimePicker();
@@ -130,7 +131,7 @@
             // 
             NewTimeBtn.Location = new Point(304, 187);
             NewTimeBtn.Name = "NewTimeBtn";
-            NewTimeBtn.Size = new Size(226, 23);
+            NewTimeBtn.Size = new Size(226, 43);
             NewTimeBtn.TabIndex = 10;
             NewTimeBtn.Text = "Добавить";
             NewTimeBtn.UseVisualStyleBackColor = true;
@@ -140,7 +141,7 @@
             // 
             UpdateTimeBtn.Location = new Point(304, 461);
             UpdateTimeBtn.Name = "UpdateTimeBtn";
-            UpdateTimeBtn.Size = new Size(226, 23);
+            UpdateTimeBtn.Size = new Size(226, 40);
             UpdateTimeBtn.TabIndex = 11;
             UpdateTimeBtn.Text = "Обновить";
             UpdateTimeBtn.UseVisualStyleBackColor = true;
@@ -150,7 +151,7 @@
             // 
             UpdateWeekBtn.Location = new Point(871, 461);
             UpdateWeekBtn.Name = "UpdateWeekBtn";
-            UpdateWeekBtn.Size = new Size(226, 23);
+            UpdateWeekBtn.Size = new Size(226, 40);
             UpdateWeekBtn.TabIndex = 19;
             UpdateWeekBtn.Text = "Обновить";
             UpdateWeekBtn.UseVisualStyleBackColor = true;
@@ -160,7 +161,7 @@
             // 
             NewWeekBtn.Location = new Point(871, 187);
             NewWeekBtn.Name = "NewWeekBtn";
-            NewWeekBtn.Size = new Size(226, 23);
+            NewWeekBtn.Size = new Size(226, 43);
             NewWeekBtn.TabIndex = 18;
             NewWeekBtn.Text = "Добавить";
             NewWeekBtn.UseVisualStyleBackColor = true;
@@ -204,9 +205,9 @@
             // 
             // DeleteTimeBtn
             // 
-            DeleteTimeBtn.Location = new Point(304, 589);
+            DeleteTimeBtn.Location = new Point(304, 572);
             DeleteTimeBtn.Name = "DeleteTimeBtn";
-            DeleteTimeBtn.Size = new Size(226, 23);
+            DeleteTimeBtn.Size = new Size(226, 40);
             DeleteTimeBtn.TabIndex = 20;
             DeleteTimeBtn.Text = "Удалить";
             DeleteTimeBtn.UseVisualStyleBackColor = true;
@@ -214,9 +215,9 @@
             // 
             // DeleteWeekBtn
             // 
-            DeleteWeekBtn.Location = new Point(871, 589);
+            DeleteWeekBtn.Location = new Point(871, 572);
             DeleteWeekBtn.Name = "DeleteWeekBtn";
-            DeleteWeekBtn.Size = new Size(226, 23);
+            DeleteWeekBtn.Size = new Size(226, 40);
             DeleteWeekBtn.TabIndex = 21;
             DeleteWeekBtn.Text = "Удалить";
             DeleteWeekBtn.UseVisualStyleBackColor = true;
@@ -285,6 +286,7 @@
             Controls.Add(NewStartTimePicker);
             Controls.Add(WeekGrid);
             Controls.Add(TimeGrid);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "TimeAndWeekForm";
             Text = "TimeAndWeekForm";
             ((System.ComponentModel.ISupportInitialize)TimeGrid).EndInit();

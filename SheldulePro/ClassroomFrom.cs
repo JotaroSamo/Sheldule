@@ -20,6 +20,8 @@ namespace SheldulePro
         public ClassroomFrom()
         {
             InitializeComponent();
+            Style.ApplyGlobalStyles(this.Controls);
+            Style.ApplyFormBackground(this);
             LoadRoom();
         }
 

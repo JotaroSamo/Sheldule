@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeachersForms));
             TeacherGrid = new DataGridView();
             NewNameTeaxherText = new TextBox();
             SearchTeachersText = new TextBox();
@@ -67,7 +68,7 @@
             // 
             NewTeacherBtn.Location = new Point(488, 85);
             NewTeacherBtn.Name = "NewTeacherBtn";
-            NewTeacherBtn.Size = new Size(235, 23);
+            NewTeacherBtn.Size = new Size(235, 37);
             NewTeacherBtn.TabIndex = 3;
             NewTeacherBtn.Text = "Добавить";
             NewTeacherBtn.UseVisualStyleBackColor = true;
@@ -84,7 +85,7 @@
             // 
             UpdateTeacherBtn.Location = new Point(488, 252);
             UpdateTeacherBtn.Name = "UpdateTeacherBtn";
-            UpdateTeacherBtn.Size = new Size(235, 23);
+            UpdateTeacherBtn.Size = new Size(235, 39);
             UpdateTeacherBtn.TabIndex = 6;
             UpdateTeacherBtn.Text = "Обновить";
             UpdateTeacherBtn.UseVisualStyleBackColor = true;
@@ -92,9 +93,9 @@
             // 
             // DeleteTeacherBtn
             // 
-            DeleteTeacherBtn.Location = new Point(488, 483);
+            DeleteTeacherBtn.Location = new Point(488, 463);
             DeleteTeacherBtn.Name = "DeleteTeacherBtn";
-            DeleteTeacherBtn.Size = new Size(235, 23);
+            DeleteTeacherBtn.Size = new Size(235, 43);
             DeleteTeacherBtn.TabIndex = 7;
             DeleteTeacherBtn.Text = "Удалить";
             DeleteTeacherBtn.UseVisualStyleBackColor = true;
@@ -112,6 +113,7 @@
             Controls.Add(SearchTeachersText);
             Controls.Add(NewNameTeaxherText);
             Controls.Add(TeacherGrid);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "TeachersForms";
             Text = "TeachersForms";
             ((System.ComponentModel.ISupportInitialize)TeacherGrid).EndInit();

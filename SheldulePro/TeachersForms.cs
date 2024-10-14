@@ -19,6 +19,8 @@ namespace SheldulePro
         public TeachersForms()
         {
             InitializeComponent();
+            Style.ApplyGlobalStyles(this.Controls);
+            Style.ApplyFormBackground(this);
             LoadTeacher();
         }
         private async void LoadTeacher()

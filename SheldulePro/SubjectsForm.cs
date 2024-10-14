@@ -22,7 +22,8 @@ namespace SheldulePro
         public SubjectForm()
         {
             InitializeComponent();
-   
+            Style.ApplyGlobalStyles(this.Controls);
+            Style.ApplyFormBackground(this);
             LoadSubjects();
         }
        
