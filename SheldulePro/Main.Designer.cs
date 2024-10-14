@@ -34,14 +34,19 @@ namespace SheldulePro
             TimeAndWeekBtn = new ToolStripButton();
             SubjectToolStrip = new ToolStripButton();
             toolStripButton3 = new ToolStripButton();
-            toolStripButton1 = new ToolStripButton();
-            toolStripButton2 = new ToolStripButton();
+            Group = new ToolStripButton();
+            RoomBtn = new ToolStripButton();
+            DayBox = new ComboBox();
+            WeekBox = new ComboBox();
+            GroupBox = new ComboBox();
+            dataGridView1 = new DataGridView();
             toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { TimeAndWeekBtn, SubjectToolStrip, toolStripButton3, toolStripButton1, toolStripButton2 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { TimeAndWeekBtn, SubjectToolStrip, toolStripButton3, Group, RoomBtn });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1209, 25);
@@ -75,33 +80,72 @@ namespace SheldulePro
             toolStripButton3.Text = "Учителя";
             toolStripButton3.Click += toolStripButton3_Click;
             // 
-            // toolStripButton1
+            // Group
             // 
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(69, 22);
-            toolStripButton1.Text = "Группы";
-            toolStripButton1.Click += toolStripButton1_Click;
+            Group.Image = (Image)resources.GetObject("Group.Image");
+            Group.ImageTransparentColor = Color.Magenta;
+            Group.Name = "Group";
+            Group.Size = new Size(69, 22);
+            Group.Text = "Группы";
+            Group.Click += toolStripButton1_Click;
             // 
-            // toolStripButton2
+            // RoomBtn
             // 
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(81, 22);
-            toolStripButton2.Text = "Кабинеты";
+            RoomBtn.Image = (Image)resources.GetObject("RoomBtn.Image");
+            RoomBtn.ImageTransparentColor = Color.Magenta;
+            RoomBtn.Name = "RoomBtn";
+            RoomBtn.Size = new Size(81, 22);
+            RoomBtn.Text = "Кабинеты";
+            RoomBtn.Click += RoomBtn_Click;
+            // 
+            // DayBox
+            // 
+            DayBox.FormattingEnabled = true;
+            DayBox.Location = new Point(107, 66);
+            DayBox.Name = "DayBox";
+            DayBox.Size = new Size(162, 23);
+            DayBox.TabIndex = 1;
+            // 
+            // WeekBox
+            // 
+            WeekBox.FormattingEnabled = true;
+            WeekBox.Location = new Point(12, 66);
+            WeekBox.Name = "WeekBox";
+            WeekBox.Size = new Size(64, 23);
+            WeekBox.Sorted = true;
+            WeekBox.TabIndex = 2;
+            // 
+            // GroupBox
+            // 
+            GroupBox.FormattingEnabled = true;
+            GroupBox.Location = new Point(290, 66);
+            GroupBox.Name = "GroupBox";
+            GroupBox.Size = new Size(218, 23);
+            GroupBox.TabIndex = 3;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 112);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(496, 480);
+            dataGridView1.TabIndex = 4;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1209, 716);
+            Controls.Add(dataGridView1);
+            Controls.Add(GroupBox);
+            Controls.Add(WeekBox);
+            Controls.Add(DayBox);
             Controls.Add(toolStrip1);
             Name = "Main";
             Text = "Form1";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -114,7 +158,11 @@ namespace SheldulePro
         private ToolStripButton toolStripButton3;
         private ToolStripButton TimeAndWeekBtn;
         private ToolStripButton SubjectToolStrip;
-        private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
+        private ToolStripButton Group;
+        private ToolStripButton RoomBtn;
+        private ComboBox DayBox;
+        private ComboBox WeekBox;
+        private ComboBox GroupBox;
+        private DataGridView dataGridView1;
     }
 }
