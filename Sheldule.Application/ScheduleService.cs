@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using CSharpFunctionalExtensions;
 
 namespace SheldulePro.Application
 {
@@ -16,8 +18,72 @@ namespace SheldulePro.Application
 
         public ScheduleService()
         {
+           
+        }
+        public async Task<Result> CreateScheduleAsync(Schedule newSchedule)
+        {
+            var errors = new List<string>();
+
+            // Проверка, занята ли группа в этот день и время
+            bool isGroupBusy = await _context.Schedules
+                .AsQueryable()
+                .AnyAsync(s =>
+                    s.GroupId == newSchedule.GroupId &&
+                    s.DayOfWeek == newSchedule.DayOfWeek &&
+                    s.ClassTimeId == newSchedule.ClassTimeId &&
+                    s.WeekId == newSchedule.WeekId);
+
+            if (isGroupBusy)
+            {
+                errors.Add("Группа уже занята в это время.");
+            }
+
+            // Проверка, занят ли преподаватель в этот день и время
+            bool isTeacherBusy = await _context.Schedules
+                .AsQueryable()
+                .AnyAsync(s =>
+                    s.TeacherId == newSchedule.TeacherId &&
+                    s.DayOfWeek == newSchedule.DayOfWeek &&
+                    s.ClassTimeId == newSchedule.ClassTimeId &&
+                    s.WeekId == newSchedule.WeekId);
+
+            if (isTeacherBusy)
+            {
+                errors.Add("Преподаватель уже занят в это время.");
+            }
+
+            // Проверка, занят ли кабинет в этот день и время
+            bool isClassroomBusy = await _context.Schedules
+                .AsQueryable()
+                .AnyAsync(s =>
+                    s.ClassroomId == newSchedule.ClassroomId &&
+                    s.DayOfWeek == newSchedule.DayOfWeek &&
+                    s.ClassTimeId == newSchedule.ClassTimeId &&
+                    s.WeekId == newSchedule.WeekId);
+
+            if (isClassroomBusy)
+            {
+                errors.Add("Кабинет уже занят в это время.");
+            }
+
+            // Если есть ошибки, возвращаем их
+            if (errors.Any())
+            {
+                return Result.Failure(string.Join(", ", errors));
+            }
+
+            // Если ошибок нет, создаем запись
+            return Result.Success();
         }
 
+        public async Task<Schedule> Filter(int WeekId, string Day, int GroupId)
+        {
+            var sheldule = await _context.Schedules.
+                Where(i => i.WeekId == WeekId && i.DayOfWeek.ToString() == Day && i.GroupId == GroupId)
+                .FirstOrDefaultAsync();
+            await LoadDependencies(sheldule);
+            return sheldule;
+        }
         // Создание нового расписания
         public async Task<Schedule> Create(Schedule entity)
         {
@@ -49,6 +115,7 @@ namespace SheldulePro.Application
                 .Include(s => s.Subject)
                 .Include(s => s.Teacher)
                 .Include(s => s.Week)
+                 .Include(s => s.Classroom)
                 .FirstOrDefaultAsync(s => s.Id == entity.Id);
         }
 
@@ -61,6 +128,7 @@ namespace SheldulePro.Application
                 .Include(s => s.Subject)
                 .Include(s => s.Teacher)
                 .Include(s => s.Week)
+                .Include(s=>s.Classroom)
                 .ToListAsync();
         }
 
@@ -96,6 +164,7 @@ namespace SheldulePro.Application
             entity.Subject = await _context.Subjects.FindAsync(entity.SubjectId);
             entity.Teacher = await _context.Teachers.FindAsync(entity.TeacherId);
             entity.Week = await _context.Weeks.FindAsync(entity.WeekId);
+            entity.Classroom = await _context.Classrooms.FindAsync(entity.ClassroomId);
 
            
         }

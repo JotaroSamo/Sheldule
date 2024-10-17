@@ -17,16 +17,17 @@ namespace SheldulePro
     {
         private readonly SubjectService _subjectService = new SubjectService();
         private static int SelectID = 0;
+        private readonly Main _main;
 
-
-        public SubjectForm()
+        public SubjectForm(Main main)
         {
             InitializeComponent();
             Style.ApplyGlobalStyles(this.Controls);
             Style.ApplyFormBackground(this);
             LoadSubjects();
+            _main = main;
         }
-       
+
 
         private async void LoadSubjects()
         {
@@ -55,6 +56,7 @@ namespace SheldulePro
                 };
                 SubjectsGrid.DataSource = await _subjectService.Create(subject);
                 LoadSubjects();
+                await _main.LoadComboBoxesAsync();
             }
             else
             {
@@ -92,6 +94,7 @@ namespace SheldulePro
                 };
                 await _subjectService.Update(subject);
                 LoadSubjects();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -106,6 +109,7 @@ namespace SheldulePro
                 };
                 await _subjectService.Delete(subject);
                 LoadSubjects();
+                await _main.LoadComboBoxesAsync();
             }
         }
     }

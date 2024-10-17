@@ -16,12 +16,14 @@ namespace SheldulePro
     {
         private readonly TeacherService _teacherService = new TeacherService();
         private int SelectTeacherID = 0;
-        public TeachersForms()
+        private readonly Main _main;
+        public TeachersForms(Main main)
         {
             InitializeComponent();
             Style.ApplyGlobalStyles(this.Controls);
             Style.ApplyFormBackground(this);
             LoadTeacher();
+            _main = main;
         }
         private async void LoadTeacher()
         {
@@ -38,6 +40,7 @@ namespace SheldulePro
                 };
                 await _teacherService.Create(teacher);
                 LoadTeacher();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -73,6 +76,7 @@ namespace SheldulePro
                 };
                 await _teacherService.Update(teacher);
                 LoadTeacher();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -87,6 +91,7 @@ namespace SheldulePro
                 };
                 await _teacherService.Delete(teacher);
                 LoadTeacher();
+                await _main.LoadComboBoxesAsync();
             }
         }
 

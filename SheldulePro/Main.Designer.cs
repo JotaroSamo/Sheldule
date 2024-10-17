@@ -39,9 +39,24 @@ namespace SheldulePro
             DayBox = new ComboBox();
             WeekBox = new ComboBox();
             GroupBox = new ComboBox();
-            dataGridView1 = new DataGridView();
+            ShelduleGrid = new DataGridView();
+            TimeBoxNew = new ComboBox();
+            RoomBoxNew = new ComboBox();
+            NewShedulebtn = new Button();
+            SubjectBoxNew = new ComboBox();
+            TypeSubjectNewBox = new ComboBox();
+            TeachersBoxNew = new ComboBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            DeleteShuduleBtn = new Button();
             toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ShelduleGrid).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
@@ -105,6 +120,7 @@ namespace SheldulePro
             DayBox.Name = "DayBox";
             DayBox.Size = new Size(162, 23);
             DayBox.TabIndex = 1;
+            DayBox.SelectedIndexChanged += WeekBox_SelectedIndexChanged;
             // 
             // WeekBox
             // 
@@ -114,6 +130,7 @@ namespace SheldulePro
             WeekBox.Size = new Size(64, 23);
             WeekBox.Sorted = true;
             WeekBox.TabIndex = 2;
+            WeekBox.SelectedIndexChanged += WeekBox_SelectedIndexChanged;
             // 
             // GroupBox
             // 
@@ -122,21 +139,170 @@ namespace SheldulePro
             GroupBox.Name = "GroupBox";
             GroupBox.Size = new Size(218, 23);
             GroupBox.TabIndex = 3;
+            GroupBox.SelectedIndexChanged += WeekBox_SelectedIndexChanged;
             // 
-            // dataGridView1
+            // ShelduleGrid
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 112);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(496, 480);
-            dataGridView1.TabIndex = 4;
+            ShelduleGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ShelduleGrid.Location = new Point(12, 112);
+            ShelduleGrid.Name = "ShelduleGrid";
+            ShelduleGrid.Size = new Size(651, 480);
+            ShelduleGrid.TabIndex = 4;
+            ShelduleGrid.SelectionChanged += ShelduleGrid_SelectionChanged;
+            // 
+            // TimeBoxNew
+            // 
+            TimeBoxNew.FormattingEnabled = true;
+            TimeBoxNew.Location = new Point(688, 112);
+            TimeBoxNew.Name = "TimeBoxNew";
+            TimeBoxNew.Size = new Size(444, 23);
+            TimeBoxNew.TabIndex = 7;
+            // 
+            // RoomBoxNew
+            // 
+            RoomBoxNew.FormattingEnabled = true;
+            RoomBoxNew.Location = new Point(688, 417);
+            RoomBoxNew.Name = "RoomBoxNew";
+            RoomBoxNew.Size = new Size(444, 23);
+            RoomBoxNew.TabIndex = 11;
+            // 
+            // NewShedulebtn
+            // 
+            NewShedulebtn.Location = new Point(688, 469);
+            NewShedulebtn.Name = "NewShedulebtn";
+            NewShedulebtn.Size = new Size(444, 40);
+            NewShedulebtn.TabIndex = 12;
+            NewShedulebtn.Text = "Добавить";
+            NewShedulebtn.UseVisualStyleBackColor = true;
+            NewShedulebtn.Click += NewShedulebtn_Click;
+            // 
+            // SubjectBoxNew
+            // 
+            SubjectBoxNew.FormattingEnabled = true;
+            SubjectBoxNew.Location = new Point(688, 185);
+            SubjectBoxNew.Name = "SubjectBoxNew";
+            SubjectBoxNew.Size = new Size(444, 23);
+            SubjectBoxNew.TabIndex = 13;
+            // 
+            // TypeSubjectNewBox
+            // 
+            TypeSubjectNewBox.FormattingEnabled = true;
+            TypeSubjectNewBox.Location = new Point(688, 270);
+            TypeSubjectNewBox.Name = "TypeSubjectNewBox";
+            TypeSubjectNewBox.Size = new Size(444, 23);
+            TypeSubjectNewBox.TabIndex = 14;
+            // 
+            // TeachersBoxNew
+            // 
+            TeachersBoxNew.FormattingEnabled = true;
+            TeachersBoxNew.Location = new Point(688, 347);
+            TeachersBoxNew.Name = "TeachersBoxNew";
+            TeachersBoxNew.Size = new Size(444, 23);
+            TeachersBoxNew.TabIndex = 15;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 39);
+            label1.Name = "label1";
+            label1.Size = new Size(47, 15);
+            label1.TabIndex = 16;
+            label1.Text = "Неделя";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(107, 39);
+            label2.Name = "label2";
+            label2.Size = new Size(34, 15);
+            label2.TabIndex = 17;
+            label2.Text = "День";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(290, 39);
+            label3.Name = "label3";
+            label3.Size = new Size(46, 15);
+            label3.TabIndex = 18;
+            label3.Text = "Группа";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(688, 69);
+            label4.Name = "label4";
+            label4.Size = new Size(35, 15);
+            label4.TabIndex = 19;
+            label4.Text = "Пара";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(688, 151);
+            label5.Name = "label5";
+            label5.Size = new Size(55, 15);
+            label5.TabIndex = 20;
+            label5.Text = "Предмет";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(688, 234);
+            label6.Name = "label6";
+            label6.Size = new Size(82, 15);
+            label6.TabIndex = 21;
+            label6.Text = "Тип предмета";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(688, 314);
+            label7.Name = "label7";
+            label7.Size = new Size(52, 15);
+            label7.TabIndex = 22;
+            label7.Text = "Учитель";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(688, 386);
+            label8.Name = "label8";
+            label8.Size = new Size(52, 15);
+            label8.TabIndex = 23;
+            label8.Text = "Кабинет";
+            // 
+            // DeleteShuduleBtn
+            // 
+            DeleteShuduleBtn.Location = new Point(12, 598);
+            DeleteShuduleBtn.Name = "DeleteShuduleBtn";
+            DeleteShuduleBtn.Size = new Size(651, 40);
+            DeleteShuduleBtn.TabIndex = 24;
+            DeleteShuduleBtn.Text = "Удалить";
+            DeleteShuduleBtn.UseVisualStyleBackColor = true;
+            DeleteShuduleBtn.Click += DeleteShuduleBtn_Click;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1209, 716);
-            Controls.Add(dataGridView1);
+            Controls.Add(DeleteShuduleBtn);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(TeachersBoxNew);
+            Controls.Add(TypeSubjectNewBox);
+            Controls.Add(SubjectBoxNew);
+            Controls.Add(NewShedulebtn);
+            Controls.Add(RoomBoxNew);
+            Controls.Add(TimeBoxNew);
+            Controls.Add(ShelduleGrid);
             Controls.Add(GroupBox);
             Controls.Add(WeekBox);
             Controls.Add(DayBox);
@@ -146,7 +312,7 @@ namespace SheldulePro
             Text = "Расписание";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ShelduleGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -164,6 +330,26 @@ namespace SheldulePro
         private ComboBox DayBox;
         private ComboBox WeekBox;
         private ComboBox GroupBox;
-        private DataGridView dataGridView1;
+        private DataGridView ShelduleGrid;
+        private ComboBox WeekBoxNew;
+        private ComboBox DayBoxNew;
+        private ComboBox TimeBoxNew;
+        private ComboBox GroupBoxNew;
+        private ComboBox comboBox5;
+        private ComboBox comboBox6;
+        private ComboBox RoomBoxNew;
+        private Button NewShedulebtn;
+        private ComboBox SubjectBoxNew;
+        private ComboBox TypeSubjectNewBox;
+        private ComboBox TeachersBoxNew;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label label8;
+        private Button DeleteShuduleBtn;
     }
 }

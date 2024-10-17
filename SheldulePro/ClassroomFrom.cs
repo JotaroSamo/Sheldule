@@ -17,12 +17,14 @@ namespace SheldulePro
     {
         private readonly ClassroomService _classroomService = new ClassroomService();
         private int SelectedRoomID = 0;
-        public ClassroomFrom()
+        private readonly Main _main;
+        public ClassroomFrom(Main main)
         {
             InitializeComponent();
             Style.ApplyGlobalStyles(this.Controls);
             Style.ApplyFormBackground(this);
             LoadRoom();
+            _main = main;
         }
 
         private async void LoadRoom()
@@ -42,6 +44,7 @@ namespace SheldulePro
                 };
                 await _classroomService.Create(room);
                 LoadRoom();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -79,6 +82,7 @@ namespace SheldulePro
                 };
                 await _classroomService.Update(room);
                 LoadRoom();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -93,6 +97,7 @@ namespace SheldulePro
                 };
                 await _classroomService.Delete(room);
                 LoadRoom();
+                await _main.LoadComboBoxesAsync();
             }
         }
 

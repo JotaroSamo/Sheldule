@@ -16,12 +16,14 @@ namespace SheldulePro
     {
         private readonly StudentGroupService _studentGroupService = new StudentGroupService();
         private int SelectedGroupID = 0;
-        public GroupForm()
+        private readonly Main _main;
+        public GroupForm(Main main)
         {
             InitializeComponent();
             Style.ApplyGlobalStyles(this.Controls);
             Style.ApplyFormBackground(this);
             LoadGroup();
+            _main = main;
         }
         private async void LoadGroup()
         {
@@ -39,6 +41,7 @@ namespace SheldulePro
                 };
                 await _studentGroupService.Create(group);
                 LoadGroup();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -74,6 +77,7 @@ namespace SheldulePro
                 };
                 await _studentGroupService.Update(group);
                 LoadGroup();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -88,6 +92,7 @@ namespace SheldulePro
                 };
                 await _studentGroupService.Delete(group);
                 LoadGroup();
+                await _main.LoadComboBoxesAsync();
             }
         }
 

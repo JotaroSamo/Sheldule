@@ -1,5 +1,8 @@
 using Sheldule.Application;
+using Sheldule.DataAccess.Enums;
+using Sheldule.DataAccess.Model;
 using SheldulePro.Application;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace SheldulePro
 {
@@ -11,29 +14,82 @@ namespace SheldulePro
         private readonly TeacherService _teacherService = new TeacherService();
         private readonly ClassTimeService _timeService = new ClassTimeService();
         private readonly WeekService _weekService = new WeekService();
+        private readonly ScheduleService _scheduleService = new ScheduleService();
+        private int SelectScheduleId = 0;
         public Main()
         {
             InitializeComponent();
-            string[] daysOfWeek = { "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота" };
-            DayBox.DataSource = daysOfWeek;
+
+
             Style.ApplyGlobalStyles(this.Controls);
             Style.ApplyFormBackground(this);
-            Load();
-           
+            LoadComboBoxesAsync();
+
         }
-        public async void Load()
+        public async Task LoadComboBoxesAsync()
         {
-            WeekBox.DataSource = await _weekService.GetList();
-            WeekBox.DisplayMember = "Number"; // Отображаем номер недели
-            WeekBox.ValueMember = "Id"; // Значение - идентификатор недели
-            //WeekBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //WeekBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            // Запуск запросов параллельно
+            var weekTask = _weekService.GetList();
+            var groupTask = _studentGroupService.GetList();
+            var timeTask = _timeService.GetList();
+            var subjectTask = _subjectService.GetList();
+            var teacherTask = _teacherService.GetList();
+            var roomTask = _classroomService.GetList();
+
+            // Ожидание завершения всех задач
+            await Task.WhenAll(weekTask, groupTask, timeTask, subjectTask, teacherTask, roomTask);
+
+            // Присваивание данных для ComboBox после завершения всех запросов
+            WeekBox.DataSource = weekTask.Result;
+            WeekBox.DisplayMember = "Number";
+            WeekBox.ValueMember = "Id";
+
+            GroupBox.DataSource = groupTask.Result;
+            GroupBox.DisplayMember = "Name";
+            GroupBox.ValueMember = "Id";
+
+            TimeBoxNew.DataSource = timeTask.Result
+             .Select(t => new
+             {
+                 Id = t.Id,
+                 Display = $"Пара {t.Number}: {t.StartTime} - {t.EndTime}" // Объединяем номер пары и время
+             })
+             .ToList();
+
+            TimeBoxNew.DisplayMember = "Display"; // Поле с объединенным текстом
+            TimeBoxNew.ValueMember = "Id"; // Поле для значения
+
+
+            GroupBox.ValueMember = "Id";
+
+            SubjectBoxNew.DataSource = subjectTask.Result;
+            SubjectBoxNew.DisplayMember = "Name";
+            SubjectBoxNew.ValueMember = "Id";
+
+            TypeSubjectNewBox.DataSource = Enum.GetValues(typeof(SubjectType)); // Привязка enum
+            DayBox.DataSource = Enum.GetValues(typeof(DayOfWeekEnum));
+            TeachersBoxNew.DataSource = teacherTask.Result;
+            TeachersBoxNew.DisplayMember = "Name";
+            TeachersBoxNew.ValueMember = "Id";
+
+            RoomBoxNew.DataSource = roomTask.Result
+                 .Select(r => new
+                 {
+                     Id = r.Id,
+                     Display = $"{r.Number} ({r.Type})" // Объединяем номер и тип
+                 })
+                 .ToList();
+
+            RoomBoxNew.DisplayMember = "Display"; // Поле с объединенным текстом
+            RoomBoxNew.ValueMember = "Id"; // Поле для значения
+
         }
+
 
         #region toolbarbtn
         private void SubjectToolStrip_Click(object sender, EventArgs e)
         {
-            SubjectForm subjectForm = new SubjectForm();
+            SubjectForm subjectForm = new SubjectForm(this);
             subjectForm.ShowDialog();
             if (subjectForm.DialogResult == DialogResult.OK)
             {
@@ -43,7 +99,7 @@ namespace SheldulePro
 
         private void TimeAndWeekBtn_Click(object sender, EventArgs e)
         {
-            TimeAndWeekForm timeAndWeekForm = new TimeAndWeekForm();
+            TimeAndWeekForm timeAndWeekForm = new TimeAndWeekForm(this);
             timeAndWeekForm.ShowDialog();
             if (timeAndWeekForm.DialogResult == DialogResult.OK)
             {
@@ -53,7 +109,7 @@ namespace SheldulePro
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            TeachersForms teachersForms = new TeachersForms();
+            TeachersForms teachersForms = new TeachersForms(this);
             teachersForms.ShowDialog();
             if (teachersForms.DialogResult == DialogResult.OK)
             {
@@ -63,7 +119,7 @@ namespace SheldulePro
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            GroupForm groupForm = new GroupForm();
+            GroupForm groupForm = new GroupForm(this);
             groupForm.ShowDialog();
             if (groupForm.DialogResult == DialogResult.OK)
             {
@@ -73,7 +129,7 @@ namespace SheldulePro
 
         private void RoomBtn_Click(object sender, EventArgs e)
         {
-            ClassroomFrom classroomFrom = new ClassroomFrom();
+            ClassroomFrom classroomFrom = new ClassroomFrom(this);
             classroomFrom.ShowDialog();
             if (classroomFrom.DialogResult == DialogResult.OK)
             {
@@ -81,5 +137,128 @@ namespace SheldulePro
             }
         }
         #endregion
+
+        private async void WeekBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Обработка конвертации для WeekBox
+            if (!int.TryParse(WeekBox.SelectedValue?.ToString(), out int selectedWeekId))
+            {
+
+                return;
+            }
+
+            // Обработка значения дня
+            string selectDay = DayBox.SelectedItem?.ToString();
+            if (string.IsNullOrWhiteSpace(selectDay))
+            {
+
+                return;
+            }
+
+            // Обработка конвертации для GroupBox
+            if (!int.TryParse(GroupBox.SelectedValue?.ToString(), out int selectGroupId))
+            {
+
+                return;
+            }
+
+            try
+            {
+                // Получаем список расписаний
+                var schedules = await _scheduleService.GetList();
+
+                // Фильтруем расписания по выбранной неделе, дню и группе
+                var filteredSchedules = schedules
+                    .Where(s => s.WeekId == selectedWeekId && s.DayOfWeek.ToString() == selectDay && s.GroupId == selectGroupId)
+                    .Select(s => new
+                    {
+                        Id = s.Id,
+                        Время = s.ClassTime.Number + " " + s.ClassTime.StartTime.ToString() + " " + s.ClassTime.EndTime.ToString(),      // Время занятия
+                        Предмет = s.Subject.Name,          // Предмет
+                        Тип = s.SubjectType.ToString(),  // Тип предмета
+                        Учитель = s.Teacher.Name,          // Преподаватель
+                        Кабинет = s.Classroom.Number       // Аудитория
+                    })
+                    .ToList();
+
+                // Привязываем данные к DataGridView
+                ShelduleGrid.DataSource = filteredSchedules;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private async void NewShedulebtn_Click(object sender, EventArgs e)
+        {
+            // Получение выбранных значений из ComboBox
+            var selectedWeekId = (int)WeekBox.SelectedValue;
+            var selectedGroupId = (int)GroupBox.SelectedValue;
+            var selectedTimeId = (int)TimeBoxNew.SelectedValue;
+            var selectedSubjectId = (int)SubjectBoxNew.SelectedValue;
+            var selectedTypeSubject = (SubjectType)TypeSubjectNewBox.SelectedItem; // Используем тип перечисления
+            var selectedTeacherId = (int)TeachersBoxNew.SelectedValue;
+            var selectedRoomId = (int)RoomBoxNew.SelectedValue;
+            var selectedDay = (DayOfWeekEnum)DayBox.SelectedValue; // Получаем значение из DayBox
+
+            var newSchedule = new Schedule
+            {
+                GroupId = selectedGroupId,
+                ClassTimeId = selectedTimeId,
+                SubjectId = selectedSubjectId,
+                SubjectType = selectedTypeSubject,
+                TeacherId = selectedTeacherId,
+                ClassroomId = selectedRoomId,
+                DayOfWeek = selectedDay,
+                WeekId = selectedWeekId
+            };
+            var result = await _scheduleService.CreateScheduleAsync(newSchedule);
+            if (result.IsFailure)
+            {
+                MessageBox.Show(result.Error);
+            }
+            else
+            {
+                await _scheduleService.Create(newSchedule);
+                await LoadComboBoxesAsync();
+            }
+        }
+
+        private void ShelduleGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            if (ShelduleGrid.CurrentRow != null)
+            {
+                // Получаем значения из текущей строки
+                try
+                {
+                    SelectScheduleId = int.Parse(ShelduleGrid.CurrentRow.Cells["Id"].Value?.ToString());
+                }
+                catch (Exception)
+                {
+
+                    SelectScheduleId = 0;
+                }
+
+
+
+
+            }
+        }
+
+        private async void DeleteShuduleBtn_Click(object sender, EventArgs e)
+        {
+            if (SelectScheduleId != 0)
+            {
+                var schedule = new Schedule
+                {
+                    Id = SelectScheduleId,
+
+                };
+                await _scheduleService.Delete(schedule);
+               
+                await LoadComboBoxesAsync();
+            }
+        }
     }
 }

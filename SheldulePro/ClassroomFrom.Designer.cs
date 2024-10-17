@@ -38,6 +38,10 @@
             UpdateTypeText = new TextBox();
             UpdateRoomBtn = new Button();
             UpdateNumberText = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)RoomGrid).BeginInit();
             SuspendLayout();
             // 
@@ -55,6 +59,7 @@
             // 
             SearchRoomText.Location = new Point(12, 7);
             SearchRoomText.Name = "SearchRoomText";
+            SearchRoomText.PlaceholderText = "Поиск";
             SearchRoomText.Size = new Size(276, 23);
             SearchRoomText.TabIndex = 1;
             SearchRoomText.TextChanged += SearchRoomText_TextChanged;
@@ -88,14 +93,14 @@
             // 
             // NewTypeText
             // 
-            NewTypeText.Location = new Point(294, 81);
+            NewTypeText.Location = new Point(294, 90);
             NewTypeText.Name = "NewTypeText";
             NewTypeText.Size = new Size(274, 23);
             NewTypeText.TabIndex = 7;
             // 
             // UpdateTypeText
             // 
-            UpdateTypeText.Location = new Point(294, 299);
+            UpdateTypeText.Location = new Point(294, 309);
             UpdateTypeText.Name = "UpdateTypeText";
             UpdateTypeText.Size = new Size(274, 23);
             UpdateTypeText.TabIndex = 10;
@@ -117,11 +122,51 @@
             UpdateNumberText.Size = new Size(274, 23);
             UpdateNumberText.TabIndex = 8;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(294, 10);
+            label1.Name = "label1";
+            label1.Size = new Size(45, 15);
+            label1.TabIndex = 17;
+            label1.Text = "Номер";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(294, 62);
+            label2.Name = "label2";
+            label2.Size = new Size(27, 15);
+            label2.TabIndex = 18;
+            label2.Text = "Тип";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(294, 281);
+            label3.Name = "label3";
+            label3.Size = new Size(27, 15);
+            label3.TabIndex = 20;
+            label3.Text = "Тип";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(294, 226);
+            label4.Name = "label4";
+            label4.Size = new Size(45, 15);
+            label4.TabIndex = 19;
+            label4.Text = "Номер";
+            // 
             // ClassroomFrom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(580, 634);
+            Controls.Add(label3);
+            Controls.Add(label4);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(UpdateTypeText);
             Controls.Add(UpdateRoomBtn);
             Controls.Add(UpdateNumberText);
@@ -150,5 +195,9 @@
         private TextBox UpdateTypeText;
         private Button UpdateRoomBtn;
         private TextBox UpdateNumberText;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
     }
 }

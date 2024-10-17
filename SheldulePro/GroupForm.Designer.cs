@@ -36,6 +36,8 @@
             UpdateGroupText = new TextBox();
             DeleteGroupBtn = new Button();
             SearchGroupText = new TextBox();
+            label2 = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)GroupGrid).BeginInit();
             SuspendLayout();
             // 
@@ -51,7 +53,7 @@
             // 
             // NewGroupText
             // 
-            NewGroupText.Location = new Point(199, 30);
+            NewGroupText.Location = new Point(199, 40);
             NewGroupText.Name = "NewGroupText";
             NewGroupText.Size = new Size(211, 23);
             NewGroupText.TabIndex = 1;
@@ -78,7 +80,7 @@
             // 
             // UpdateGroupText
             // 
-            UpdateGroupText.Location = new Point(199, 184);
+            UpdateGroupText.Location = new Point(199, 194);
             UpdateGroupText.Name = "UpdateGroupText";
             UpdateGroupText.Size = new Size(211, 23);
             UpdateGroupText.TabIndex = 3;
@@ -97,15 +99,36 @@
             // 
             SearchGroupText.Location = new Point(12, 1);
             SearchGroupText.Name = "SearchGroupText";
+            SearchGroupText.PlaceholderText = "Поиск";
             SearchGroupText.Size = new Size(181, 23);
             SearchGroupText.TabIndex = 6;
             SearchGroupText.TextChanged += SearchGroupText_TextChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(199, 166);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 15);
+            label2.TabIndex = 20;
+            label2.Text = "Название";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(199, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(59, 15);
+            label1.TabIndex = 19;
+            label1.Text = "Название";
             // 
             // GroupForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(422, 450);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(SearchGroupText);
             Controls.Add(DeleteGroupBtn);
             Controls.Add(UpdateGroupBtn);
@@ -130,5 +153,7 @@
         private TextBox UpdateGroupText;
         private Button DeleteGroupBtn;
         private TextBox SearchGroupText;
+        private Label label2;
+        private Label label1;
     }
 }

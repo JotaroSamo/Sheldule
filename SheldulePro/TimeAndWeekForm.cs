@@ -20,13 +20,15 @@ namespace SheldulePro
         private readonly WeekService _weekService = new WeekService();
         private int SelectTimeID = 0;
         private int SelectWeekID = 0;
-        public TimeAndWeekForm()
+        private readonly Main _main;
+        public TimeAndWeekForm(Main main)
         {
             InitializeComponent();
             Style.ApplyGlobalStyles(this.Controls);
             Style.ApplyFormBackground(this);
             LoadTime();
             LoadWeek();
+            _main = main;
         }
         private async void LoadTime()
         {
@@ -47,6 +49,7 @@ namespace SheldulePro
                 };
                 await _timeService.Create(time);
                 LoadTime();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -108,6 +111,7 @@ namespace SheldulePro
                 };
                 await _timeService.Update(time);
                 LoadTime();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -122,6 +126,7 @@ namespace SheldulePro
                 };
                 await _timeService.Delete(time);
                 LoadTime();
+                await _main.LoadComboBoxesAsync();
             }
         }
         public async void LoadWeek()
@@ -141,6 +146,7 @@ namespace SheldulePro
                 };
                 await _weekService.Create(week);
                 LoadWeek();
+                await _main.LoadComboBoxesAsync();
 
             }
         }
@@ -159,6 +165,7 @@ namespace SheldulePro
                 };
                 await _weekService.Update(week);
                 LoadWeek();
+                await _main.LoadComboBoxesAsync();
             }
         }
 
@@ -195,6 +202,7 @@ namespace SheldulePro
                 };
                 await _weekService.Delete(week);
                 LoadWeek();
+                await _main.LoadComboBoxesAsync();
             }
         }
 

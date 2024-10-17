@@ -19,6 +19,9 @@ namespace Sheldule.DataAccess.Model
         public SubjectType SubjectType { get; set; }
         public int TeacherId { get; set; }
         public Teacher Teacher { get; set; }
+
+        public int ClassroomId { get; set; }
+        public Classroom Classroom { get; set; }
         public DayOfWeekEnum DayOfWeek { get; set; }
         public int WeekId { get; set; }
         public Week Week { get; set; }

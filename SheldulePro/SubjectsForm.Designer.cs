@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SubjectForm));
             SubjectsGrid = new DataGridView();
             NewSubjectText = new TextBox();
@@ -37,15 +37,17 @@
             NewSubjectBtn = new Button();
             UpdateSubjectBtn = new Button();
             DeleteSubjectbtn = new Button();
+            label2 = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)SubjectsGrid).BeginInit();
             SuspendLayout();
             // 
             // SubjectsGrid
             // 
-            dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 255, 192);
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            SubjectsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 255, 192);
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            SubjectsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             SubjectsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             SubjectsGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             SubjectsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -66,6 +68,7 @@
             // 
             SearchText.Location = new Point(12, 26);
             SearchText.Name = "SearchText";
+            SearchText.PlaceholderText = "Поиск";
             SearchText.Size = new Size(631, 23);
             SearchText.TabIndex = 2;
             SearchText.TextChanged += SearxhText_TextChanged;
@@ -107,11 +110,31 @@
             DeleteSubjectbtn.UseVisualStyleBackColor = true;
             DeleteSubjectbtn.Click += DeleteSubjectbtn_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(649, 296);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 15);
+            label2.TabIndex = 20;
+            label2.Text = "Название";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(649, 29);
+            label1.Name = "label1";
+            label1.Size = new Size(59, 15);
+            label1.TabIndex = 19;
+            label1.Text = "Название";
+            // 
             // SubjectForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1211, 720);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(DeleteSubjectbtn);
             Controls.Add(UpdateSubjectBtn);
             Controls.Add(NewSubjectBtn);
@@ -136,5 +159,7 @@
         private Button NewSubjectBtn;
         private Button UpdateSubjectBtn;
         private Button DeleteSubjectbtn;
+        private Label label2;
+        private Label label1;
     }
 }

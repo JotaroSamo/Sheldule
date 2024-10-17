@@ -36,6 +36,8 @@
             UpdateNameTeacherText = new TextBox();
             UpdateTeacherBtn = new Button();
             DeleteTeacherBtn = new Button();
+            label2 = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)TeacherGrid).BeginInit();
             SuspendLayout();
             // 
@@ -60,6 +62,7 @@
             // 
             SearchTeachersText.Location = new Point(12, 6);
             SearchTeachersText.Name = "SearchTeachersText";
+            SearchTeachersText.PlaceholderText = "Поиск";
             SearchTeachersText.Size = new Size(403, 23);
             SearchTeachersText.TabIndex = 2;
             SearchTeachersText.TextChanged += SearchTeachersText_TextChanged;
@@ -101,11 +104,31 @@
             DeleteTeacherBtn.UseVisualStyleBackColor = true;
             DeleteTeacherBtn.Click += DeleteTeacherBtn_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(488, 180);
+            label2.Name = "label2";
+            label2.Size = new Size(34, 15);
+            label2.TabIndex = 20;
+            label2.Text = "ФИО";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(488, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(34, 15);
+            label1.TabIndex = 19;
+            label1.Text = "ФИО";
+            // 
             // TeachersForms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(787, 518);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(DeleteTeacherBtn);
             Controls.Add(UpdateTeacherBtn);
             Controls.Add(UpdateNameTeacherText);
@@ -130,5 +153,7 @@
         private TextBox UpdateNameTeacherText;
         private Button UpdateTeacherBtn;
         private Button DeleteTeacherBtn;
+        private Label label2;
+        private Label label1;
     }
 }
