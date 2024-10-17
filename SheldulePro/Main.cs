@@ -3,6 +3,7 @@ using Sheldule.DataAccess.Enums;
 using Sheldule.DataAccess.Model;
 using SheldulePro.Application;
 using System.DirectoryServices.ActiveDirectory;
+using System.Linq;
 
 namespace SheldulePro
 {
@@ -44,9 +45,15 @@ namespace SheldulePro
             WeekBox.DisplayMember = "Number";
             WeekBox.ValueMember = "Id";
 
+            
             GroupBox.DataSource = groupTask.Result;
             GroupBox.DisplayMember = "Name";
             GroupBox.ValueMember = "Id";
+
+        
+            TeachersBoxNew.DataSource = teacherTask.Result;
+            TeachersBoxNew.DisplayMember = "Name";
+            TeachersBoxNew.ValueMember = "Id";
 
             TimeBoxNew.DataSource = timeTask.Result
              .Select(t => new
@@ -68,9 +75,7 @@ namespace SheldulePro
 
             TypeSubjectNewBox.DataSource = Enum.GetValues(typeof(SubjectType)); // Привязка enum
             DayBox.DataSource = Enum.GetValues(typeof(DayOfWeekEnum));
-            TeachersBoxNew.DataSource = teacherTask.Result;
-            TeachersBoxNew.DisplayMember = "Name";
-            TeachersBoxNew.ValueMember = "Id";
+           
 
             RoomBoxNew.DataSource = roomTask.Result
                  .Select(r => new
@@ -95,7 +100,7 @@ namespace SheldulePro
             // Формируем имя файла с текущей датой и временем
             var fileName = $"ScheduleReport_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.pdf";
             var filePath = Path.Combine(desktopPath, fileName);
-            await _scheduleService.SaveScheduleReport(filePath);
+            await _scheduleService.GenerateReport(filePath);
             MessageBox.Show("Отчет сохранен на рабочем столе.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
@@ -152,6 +157,8 @@ namespace SheldulePro
 
         private async void WeekBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var selectedGroups = GroupBox.SelectedItems.Cast<StudentGroup>().Select(s => s.Id).ToList();
+   
             // Обработка конвертации для WeekBox
             if (!int.TryParse(WeekBox.SelectedValue?.ToString(), out int selectedWeekId))
             {
@@ -168,11 +175,12 @@ namespace SheldulePro
             }
 
             // Обработка конвертации для GroupBox
-            if (!int.TryParse(GroupBox.SelectedValue?.ToString(), out int selectGroupId))
+            if (selectedGroups is null)
             {
 
                 return;
             }
+           
 
             try
             {
@@ -181,24 +189,28 @@ namespace SheldulePro
 
                 // Фильтруем расписания по выбранной неделе, дню и группе
                 var filteredSchedules = schedules
-                    .Where(s => s.WeekId == selectedWeekId && s.DayOfWeek.ToString() == selectDay && s.GroupId == selectGroupId)
+                    .Where(s => s.WeekId == selectedWeekId &&
+                                s.DayOfWeek.ToString() == selectDay &&
+                                s.Group.Any(g => selectedGroups.Contains(g.Id)))
                     .Select(s => new
                     {
                         Id = s.Id,
-                        Время = s.ClassTime.Number + " " + s.ClassTime.StartTime.ToString() + " " + s.ClassTime.EndTime.ToString(),      // Время занятия
-                        Предмет = s.Subject.Name,          // Предмет
-                        Тип = s.SubjectType.ToString(),  // Тип предмета
-                        Учитель = s.Teacher.Name,          // Преподаватель
-                        Кабинет = s.Classroom.Number       // Аудитория
+                        Группы = string.Join(", ", s.Group.Select(t => t.Name)),
+                        Время = s.ClassTime.Number + " " + s.ClassTime.StartTime.ToString() + " - " + s.ClassTime.EndTime.ToString(),  // Время занятия
+                        Предмет = s.Subject.Name,            // Предмет
+                        Тип = s.SubjectType.ToString(),      // Тип предмета
+                        Учитель = string.Join(", ", s.Teacher.Select(t => t.Name)),  // Преподаватели через запятую
+                        Кабинет = s.Classroom.Number         // Аудитория
                     })
                     .ToList();
+
 
                 // Привязываем данные к DataGridView
                 ShelduleGrid.DataSource = filteredSchedules;
             }
             catch (Exception ex)
             {
-
+             
             }
         }
 
@@ -206,21 +218,24 @@ namespace SheldulePro
         {
             // Получение выбранных значений из ComboBox
             var selectedWeekId = (int)WeekBox.SelectedValue;
-            var selectedGroupId = (int)GroupBox.SelectedValue;
+   
             var selectedTimeId = (int)TimeBoxNew.SelectedValue;
             var selectedSubjectId = (int)SubjectBoxNew.SelectedValue;
             var selectedTypeSubject = (SubjectType)TypeSubjectNewBox.SelectedItem; // Используем тип перечисления
-            var selectedTeacherId = (int)TeachersBoxNew.SelectedValue;
+       
             var selectedRoomId = (int)RoomBoxNew.SelectedValue;
             var selectedDay = (DayOfWeekEnum)DayBox.SelectedValue; // Получаем значение из DayBox
 
+            var selectedGroups = GroupBox.SelectedItems.Cast<StudentGroup>().ToList();
+            var selectedTeachers = TeachersBoxNew.SelectedItems.Cast<Teacher>().ToList();
+
             var newSchedule = new Schedule
             {
-                GroupId = selectedGroupId,
+                Group = selectedGroups,
                 ClassTimeId = selectedTimeId,
                 SubjectId = selectedSubjectId,
                 SubjectType = selectedTypeSubject,
-                TeacherId = selectedTeacherId,
+                Teacher = selectedTeachers,
                 ClassroomId = selectedRoomId,
                 DayOfWeek = selectedDay,
                 WeekId = selectedWeekId

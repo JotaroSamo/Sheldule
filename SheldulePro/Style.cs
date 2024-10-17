@@ -84,6 +84,7 @@ namespace SheldulePro
 
                     // Применяем автоматическое заполнение столбцов
                     dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Автоматическое заполнение столбцов
+                   
                 }
                 else if (ctrl is Label label)
                 {

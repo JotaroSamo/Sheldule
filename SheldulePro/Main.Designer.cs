@@ -39,14 +39,12 @@ namespace SheldulePro
             toolReport = new ToolStripButton();
             DayBox = new ComboBox();
             WeekBox = new ComboBox();
-            GroupBox = new ComboBox();
             ShelduleGrid = new DataGridView();
             TimeBoxNew = new ComboBox();
             RoomBoxNew = new ComboBox();
             NewShedulebtn = new Button();
             SubjectBoxNew = new ComboBox();
             TypeSubjectNewBox = new ComboBox();
-            TeachersBoxNew = new ComboBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -56,6 +54,8 @@ namespace SheldulePro
             label7 = new Label();
             label8 = new Label();
             DeleteShuduleBtn = new Button();
+            GroupBox = new ListBox();
+            TeachersBoxNew = new ListBox();
             toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ShelduleGrid).BeginInit();
             SuspendLayout();
@@ -142,7 +142,7 @@ namespace SheldulePro
             DayBox.FormattingEnabled = true;
             DayBox.Location = new Point(107, 66);
             DayBox.Name = "DayBox";
-            DayBox.Size = new Size(162, 23);
+            DayBox.Size = new Size(165, 23);
             DayBox.TabIndex = 1;
             DayBox.SelectedIndexChanged += WeekBox_SelectedIndexChanged;
             // 
@@ -156,19 +156,10 @@ namespace SheldulePro
             WeekBox.TabIndex = 2;
             WeekBox.SelectedIndexChanged += WeekBox_SelectedIndexChanged;
             // 
-            // GroupBox
-            // 
-            GroupBox.FormattingEnabled = true;
-            GroupBox.Location = new Point(290, 66);
-            GroupBox.Name = "GroupBox";
-            GroupBox.Size = new Size(218, 23);
-            GroupBox.TabIndex = 3;
-            GroupBox.SelectedIndexChanged += WeekBox_SelectedIndexChanged;
-            // 
             // ShelduleGrid
             // 
             ShelduleGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ShelduleGrid.Location = new Point(12, 112);
+            ShelduleGrid.Location = new Point(12, 185);
             ShelduleGrid.Name = "ShelduleGrid";
             ShelduleGrid.Size = new Size(651, 480);
             ShelduleGrid.TabIndex = 4;
@@ -185,14 +176,14 @@ namespace SheldulePro
             // RoomBoxNew
             // 
             RoomBoxNew.FormattingEnabled = true;
-            RoomBoxNew.Location = new Point(688, 417);
+            RoomBoxNew.Location = new Point(688, 617);
             RoomBoxNew.Name = "RoomBoxNew";
             RoomBoxNew.Size = new Size(444, 23);
             RoomBoxNew.TabIndex = 11;
             // 
             // NewShedulebtn
             // 
-            NewShedulebtn.Location = new Point(688, 469);
+            NewShedulebtn.Location = new Point(688, 669);
             NewShedulebtn.Name = "NewShedulebtn";
             NewShedulebtn.Size = new Size(444, 40);
             NewShedulebtn.TabIndex = 12;
@@ -215,14 +206,6 @@ namespace SheldulePro
             TypeSubjectNewBox.Name = "TypeSubjectNewBox";
             TypeSubjectNewBox.Size = new Size(444, 23);
             TypeSubjectNewBox.TabIndex = 14;
-            // 
-            // TeachersBoxNew
-            // 
-            TeachersBoxNew.FormattingEnabled = true;
-            TeachersBoxNew.Location = new Point(688, 347);
-            TeachersBoxNew.Name = "TeachersBoxNew";
-            TeachersBoxNew.Size = new Size(444, 23);
-            TeachersBoxNew.TabIndex = 15;
             // 
             // label1
             // 
@@ -274,7 +257,7 @@ namespace SheldulePro
             label6.AutoSize = true;
             label6.Location = new Point(688, 234);
             label6.Name = "label6";
-            label6.Size = new Size(82, 15);
+            label6.Size = new Size(83, 15);
             label6.TabIndex = 21;
             label6.Text = "Тип предмета";
             // 
@@ -290,7 +273,7 @@ namespace SheldulePro
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(688, 386);
+            label8.Location = new Point(688, 586);
             label8.Name = "label8";
             label8.Size = new Size(52, 15);
             label8.TabIndex = 23;
@@ -298,7 +281,7 @@ namespace SheldulePro
             // 
             // DeleteShuduleBtn
             // 
-            DeleteShuduleBtn.Location = new Point(12, 598);
+            DeleteShuduleBtn.Location = new Point(12, 671);
             DeleteShuduleBtn.Name = "DeleteShuduleBtn";
             DeleteShuduleBtn.Size = new Size(651, 40);
             DeleteShuduleBtn.TabIndex = 24;
@@ -306,11 +289,34 @@ namespace SheldulePro
             DeleteShuduleBtn.UseVisualStyleBackColor = true;
             DeleteShuduleBtn.Click += DeleteShuduleBtn_Click;
             // 
+            // GroupBox
+            // 
+            GroupBox.FormattingEnabled = true;
+            GroupBox.ItemHeight = 15;
+            GroupBox.Location = new Point(290, 66);
+            GroupBox.Name = "GroupBox";
+            GroupBox.SelectionMode = SelectionMode.MultiSimple;
+            GroupBox.Size = new Size(373, 109);
+            GroupBox.TabIndex = 31;
+            GroupBox.SelectedValueChanged += WeekBox_SelectedIndexChanged;
+            // 
+            // TeachersBoxNew
+            // 
+            TeachersBoxNew.FormattingEnabled = true;
+            TeachersBoxNew.ItemHeight = 15;
+            TeachersBoxNew.Location = new Point(688, 357);
+            TeachersBoxNew.Name = "TeachersBoxNew";
+            TeachersBoxNew.SelectionMode = SelectionMode.MultiSimple;
+            TeachersBoxNew.Size = new Size(444, 214);
+            TeachersBoxNew.TabIndex = 32;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1209, 716);
+            Controls.Add(TeachersBoxNew);
+            Controls.Add(GroupBox);
             Controls.Add(DeleteShuduleBtn);
             Controls.Add(label8);
             Controls.Add(label7);
@@ -320,14 +326,12 @@ namespace SheldulePro
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(TeachersBoxNew);
             Controls.Add(TypeSubjectNewBox);
             Controls.Add(SubjectBoxNew);
             Controls.Add(NewShedulebtn);
             Controls.Add(RoomBoxNew);
             Controls.Add(TimeBoxNew);
             Controls.Add(ShelduleGrid);
-            Controls.Add(GroupBox);
             Controls.Add(WeekBox);
             Controls.Add(DayBox);
             Controls.Add(toolStrip);
@@ -353,7 +357,6 @@ namespace SheldulePro
         private ToolStripButton RoomBtn;
         private ComboBox DayBox;
         private ComboBox WeekBox;
-        private ComboBox GroupBox;
         private DataGridView ShelduleGrid;
         private ComboBox WeekBoxNew;
         private ComboBox DayBoxNew;
@@ -365,7 +368,6 @@ namespace SheldulePro
         private Button NewShedulebtn;
         private ComboBox SubjectBoxNew;
         private ComboBox TypeSubjectNewBox;
-        private ComboBox TeachersBoxNew;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -376,5 +378,7 @@ namespace SheldulePro
         private Label label8;
         private Button DeleteShuduleBtn;
         private ToolStripButton toolReport;
+        private ListBox GroupBox;
+        private ListBox TeachersBoxNew;
     }
 }
