@@ -30,12 +30,13 @@ namespace SheldulePro
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            toolStrip1 = new ToolStrip();
+            toolStrip = new ToolStrip();
             TimeAndWeekBtn = new ToolStripButton();
             SubjectToolStrip = new ToolStripButton();
             toolStripButton3 = new ToolStripButton();
             Group = new ToolStripButton();
             RoomBtn = new ToolStripButton();
+            toolReport = new ToolStripButton();
             DayBox = new ComboBox();
             WeekBox = new ComboBox();
             GroupBox = new ComboBox();
@@ -55,63 +56,86 @@ namespace SheldulePro
             label7 = new Label();
             label8 = new Label();
             DeleteShuduleBtn = new Button();
-            toolStrip1.SuspendLayout();
+            toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ShelduleGrid).BeginInit();
             SuspendLayout();
             // 
-            // toolStrip1
+            // toolStrip
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { TimeAndWeekBtn, SubjectToolStrip, toolStripButton3, Group, RoomBtn });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1209, 25);
-            toolStrip1.TabIndex = 0;
-            toolStrip1.Text = "toolStrip1";
+            toolStrip.BackColor = SystemColors.ActiveCaptionText;
+            toolStrip.Items.AddRange(new ToolStripItem[] { TimeAndWeekBtn, SubjectToolStrip, toolStripButton3, Group, RoomBtn, toolReport });
+            toolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            toolStrip.Location = new Point(0, 0);
+            toolStrip.Name = "toolStrip";
+            toolStrip.Size = new Size(1209, 28);
+            toolStrip.TabIndex = 0;
+            toolStrip.Text = "toolStrip1";
             // 
             // TimeAndWeekBtn
             // 
+            TimeAndWeekBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            TimeAndWeekBtn.ForeColor = SystemColors.Control;
             TimeAndWeekBtn.Image = (Image)resources.GetObject("TimeAndWeekBtn.Image");
             TimeAndWeekBtn.ImageTransparentColor = Color.Magenta;
             TimeAndWeekBtn.Name = "TimeAndWeekBtn";
-            TimeAndWeekBtn.Size = new Size(118, 22);
+            TimeAndWeekBtn.Size = new Size(149, 25);
             TimeAndWeekBtn.Text = "Занятия и время";
             TimeAndWeekBtn.Click += TimeAndWeekBtn_Click;
             // 
             // SubjectToolStrip
             // 
+            SubjectToolStrip.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            SubjectToolStrip.ForeColor = SystemColors.Control;
             SubjectToolStrip.Image = (Image)resources.GetObject("SubjectToolStrip.Image");
             SubjectToolStrip.ImageTransparentColor = Color.Magenta;
             SubjectToolStrip.Name = "SubjectToolStrip";
-            SubjectToolStrip.Size = new Size(84, 22);
+            SubjectToolStrip.Size = new Size(104, 25);
             SubjectToolStrip.Text = "Предметы";
             SubjectToolStrip.Click += SubjectToolStrip_Click;
             // 
             // toolStripButton3
             // 
+            toolStripButton3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            toolStripButton3.ForeColor = SystemColors.Control;
             toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
             toolStripButton3.ImageTransparentColor = Color.Magenta;
             toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(72, 22);
+            toolStripButton3.Size = new Size(88, 25);
             toolStripButton3.Text = "Учителя";
             toolStripButton3.Click += toolStripButton3_Click;
             // 
             // Group
             // 
+            Group.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            Group.ForeColor = SystemColors.Control;
             Group.Image = (Image)resources.GetObject("Group.Image");
             Group.ImageTransparentColor = Color.Magenta;
             Group.Name = "Group";
-            Group.Size = new Size(69, 22);
+            Group.Size = new Size(84, 25);
             Group.Text = "Группы";
             Group.Click += toolStripButton1_Click;
             // 
             // RoomBtn
             // 
+            RoomBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            RoomBtn.ForeColor = SystemColors.Control;
             RoomBtn.Image = (Image)resources.GetObject("RoomBtn.Image");
             RoomBtn.ImageTransparentColor = Color.Magenta;
             RoomBtn.Name = "RoomBtn";
-            RoomBtn.Size = new Size(81, 22);
+            RoomBtn.Size = new Size(100, 25);
             RoomBtn.Text = "Кабинеты";
             RoomBtn.Click += RoomBtn_Click;
+            // 
+            // toolReport
+            // 
+            toolReport.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            toolReport.ForeColor = SystemColors.Control;
+            toolReport.Image = (Image)resources.GetObject("toolReport.Image");
+            toolReport.ImageTransparentColor = Color.Magenta;
+            toolReport.Name = "toolReport";
+            toolReport.Size = new Size(73, 25);
+            toolReport.Text = "Отчет";
+            toolReport.Click += toolReport_Click;
             // 
             // DayBox
             // 
@@ -306,12 +330,12 @@ namespace SheldulePro
             Controls.Add(GroupBox);
             Controls.Add(WeekBox);
             Controls.Add(DayBox);
-            Controls.Add(toolStrip1);
+            Controls.Add(toolStrip);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
             Text = "Расписание";
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            toolStrip.ResumeLayout(false);
+            toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ShelduleGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -321,7 +345,7 @@ namespace SheldulePro
 
         #endregion
 
-        private ToolStrip toolStrip1;
+        private ToolStrip toolStrip;
         private ToolStripButton toolStripButton3;
         private ToolStripButton TimeAndWeekBtn;
         private ToolStripButton SubjectToolStrip;
@@ -351,5 +375,6 @@ namespace SheldulePro
         private Label label7;
         private Label label8;
         private Button DeleteShuduleBtn;
+        private ToolStripButton toolReport;
     }
 }

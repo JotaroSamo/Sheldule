@@ -20,7 +20,7 @@ namespace SheldulePro
         {
             InitializeComponent();
 
-
+            toolStrip.BackColor = Color.FromArgb(50, 50, 50);
             Style.ApplyGlobalStyles(this.Controls);
             Style.ApplyFormBackground(this);
             LoadComboBoxesAsync();
@@ -87,6 +87,18 @@ namespace SheldulePro
 
 
         #region toolbarbtn
+
+        private async void toolReport_Click(object sender, EventArgs e)
+        {
+            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            // Формируем имя файла с текущей датой и временем
+            var fileName = $"ScheduleReport_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.pdf";
+            var filePath = Path.Combine(desktopPath, fileName);
+            await _scheduleService.SaveScheduleReport(filePath);
+            MessageBox.Show("Отчет сохранен на рабочем столе.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
         private void SubjectToolStrip_Click(object sender, EventArgs e)
         {
             SubjectForm subjectForm = new SubjectForm(this);
@@ -256,9 +268,11 @@ namespace SheldulePro
 
                 };
                 await _scheduleService.Delete(schedule);
-               
+
                 await LoadComboBoxesAsync();
             }
         }
+
+        
     }
 }

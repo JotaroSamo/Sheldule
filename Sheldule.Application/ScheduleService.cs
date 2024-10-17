@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using CSharpFunctionalExtensions;
+using PdfSharpCore.Drawing;
+using PdfSharpCore.Pdf;
+
 
 namespace SheldulePro.Application
 {
@@ -20,6 +23,131 @@ namespace SheldulePro.Application
         {
            
         }
+        public async Task SaveScheduleReport(string filePath)
+        {
+            try
+            {
+                var _schedules = await GetList();
+
+                // Создаем PDF-документ
+                using (PdfDocument document = new PdfDocument())
+                {
+                    document.Info.Title = "Отчет о расписании";
+
+                    // Добавляем страницу
+                    PdfPage page = document.AddPage();
+                    page.Size = PdfSharpCore.PageSize.A4;
+
+                    // Создаем графический объект для рисования
+                    XGraphics gfx = XGraphics.FromPdfPage(page);
+                    XFont fontTitle = new XFont("Times New Roman", 18, XFontStyle.Bold);
+                    XFont fontHeader = new XFont("Times New Roman", 16, XFontStyle.Bold);
+                    XFont fontText = new XFont("Times New Roman", 14, XFontStyle.Regular);
+
+                    // Добавляем заголовок
+                    gfx.DrawString("Отчет о расписании", fontTitle, XBrushes.Black, new XRect(0, 20, page.Width, 0), XStringFormats.TopCenter);
+
+                    // Группировка расписания по группам
+                    var groupedSchedules = _schedules.GroupBy(schedule => schedule.GroupId)
+                                                      .ToDictionary(g => g.Key, g => g.ToList());
+
+                    // Переменная для отслеживания текущей высоты рисования
+                    double yPoint = 50;
+
+                    // Создание отчета
+                    foreach (var group in groupedSchedules)
+                    {
+                        var groupSchedules = group.Value;
+                        var studentGroup = groupSchedules.First().Group; // Предполагаем, что все расписания имеют одну группу
+
+                        // Добавляем название группы с градиентным фоном и округлением
+                        DrawGradientRectangle(gfx, 20, yPoint, page.Width - 40, 30, XColors.LightGray, XColors.DarkGray);
+                        gfx.DrawString($"Группа: {studentGroup.Name}", fontHeader, XBrushes.Black, new XRect(20, yPoint, page.Width - 40, 0), XStringFormats.TopLeft);
+                        yPoint += 40; // Увеличиваем высоту для следующего блока
+
+                        // Группировка по неделям
+                        var groupedByWeeks = groupSchedules.GroupBy(schedule => schedule.Week.Number);
+                        foreach (var week in groupedByWeeks)
+                        {
+                            gfx.DrawString($"Неделя: {week.Key}", fontHeader, XBrushes.Black, new XRect(20, yPoint, page.Width - 40, 0), XStringFormats.TopLeft);
+                            yPoint += 20;
+
+                            // Создаем таблицу для расписания
+                            foreach (var schedule in week)
+                            {
+                                // Рисуем строку с округленным фоном
+                                DrawGradientRectangle(gfx, 20, yPoint, page.Width - 40, 20, XColors.White, XColors.LightGray);
+
+                                // Добавляем данные в строку с обработкой переполнения текста
+                                gfx.DrawString(schedule.DayOfWeek.ToString(), fontText, XBrushes.Black, new XRect(20, yPoint, 100, 0), XStringFormats.TopLeft);
+                                gfx.DrawString(schedule.Subject.Name, fontText, XBrushes.Black, new XRect(120, yPoint, 100, 0), XStringFormats.TopLeft);
+                                gfx.DrawString(schedule.Teacher.Name, fontText, XBrushes.Black, new XRect(220, yPoint, 100, 0), XStringFormats.TopLeft);
+                                gfx.DrawString(schedule.Classroom.Number, fontText, XBrushes.Black, new XRect(320, yPoint, 100, 0), XStringFormats.TopLeft);
+                                gfx.DrawString(schedule.SubjectType.ToString(), fontText, XBrushes.Black, new XRect(420, yPoint, 100, 0), XStringFormats.TopLeft);
+
+                                // Обработка переполнения текста для времени
+                                string timeString = $"{schedule.ClassTime.StartTime:hh\\:mm}";
+                                DrawStringWithWidthLimit(gfx, timeString, fontText, XBrushes.Black, 520, yPoint, 100);
+
+                                yPoint += 20; // Увеличиваем высоту для следующей строки
+                            }
+
+                            yPoint += 10; // Отступ между неделями
+                        }
+
+                        yPoint += 20; // Отступ между группами
+                    }
+
+                    // Сохраняем документ в файл
+                    document.Save(filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Логирование или уведомление об ошибке
+                Console.WriteLine($"Ошибка при сохранении отчета: {ex.Message}");
+            }
+        }
+
+
+        // Метод для рисования градиента
+        private void DrawGradientRectangle(XGraphics gfx, double x, double y, double width, double height, XColor color1, XColor color2)
+        {
+            XLinearGradientBrush brush = new XLinearGradientBrush(new XPoint(x, y), new XPoint(x, y + height), color1, color2);
+            gfx.DrawRectangle(brush, x, y, width, height);
+        }
+
+        // Метод для рисования строки с ограничением по ширине
+        private void DrawStringWithWidthLimit(XGraphics gfx, string text, XFont font, XBrush brush, double x, double y, double maxWidth)
+        {
+            // Разделение строки на слова
+            string[] words = text.Split(' ');
+            string line = string.Empty;
+            double lineHeight = font.GetHeight();
+            double currentY = y;
+
+            foreach (var word in words)
+            {
+                string testLine = line + word + " ";
+                double testWidth = gfx.MeasureString(testLine, font).Width;
+
+                if (testWidth > maxWidth)
+                {
+                    gfx.DrawString(line, font, brush, new XRect(x, currentY, maxWidth, lineHeight), XStringFormats.TopLeft);
+                    line = word + " ";
+                    currentY += lineHeight; // Переход на следующую строку
+                }
+                else
+                {
+                    line = testLine;
+                }
+            }
+
+            // Отрисовка последней линии
+            gfx.DrawString(line, font, brush, new XRect(x, currentY, maxWidth, lineHeight), XStringFormats.TopLeft);
+        }
+
+
         public async Task<Result> CreateScheduleAsync(Schedule newSchedule)
         {
             var errors = new List<string>();
