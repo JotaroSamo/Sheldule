@@ -30,6 +30,36 @@ namespace SheldulePro
                     button.MouseEnter += (sender, e) => button.BackColor = Color.SteelBlue;
                     button.MouseLeave += (sender, e) => button.BackColor = Color.FromArgb(50, 50, 50);
                 }
+                else if (ctrl is ListBox listBox)
+                {
+                    // Применяем стили для ListBox
+                    listBox.BackColor = Color.FromArgb(30, 30, 30); // Темный фон
+                    listBox.ForeColor = Color.White; // Цвет текста
+                    listBox.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+                    listBox.BorderStyle = BorderStyle.FixedSingle;
+
+                  
+                    listBox.DrawItem += (sender, e) =>
+                    {
+                        if (e.Index < 0) return;
+
+                        // Рисуем фон
+                        e.DrawBackground();
+
+                        // Устанавливаем цвет текста в зависимости от состояния
+                        Color textColor = (e.State & DrawItemState.Selected) == DrawItemState.Selected ? Color.White : listBox.ForeColor;
+                        Color backgroundColor = (e.State & DrawItemState.Selected) == DrawItemState.Selected ? Color.SteelBlue : listBox.BackColor;
+
+                        // Рисуем прямоугольник фона
+                        e.Graphics.FillRectangle(new SolidBrush(backgroundColor), e.Bounds);
+                        e.Graphics.DrawString(listBox.Items[e.Index].ToString(), listBox.Font, new SolidBrush(textColor), e.Bounds);
+
+                        e.DrawFocusRectangle();
+                    };
+
+                    // Адаптивность для ListBox
+                    listBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+                }
                 else if (ctrl is TextBox textBox)
                 {
                     // Применяем стили текстовых полей
