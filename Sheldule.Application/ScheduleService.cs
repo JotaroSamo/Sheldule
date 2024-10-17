@@ -48,13 +48,14 @@ namespace SheldulePro.Application
             int yPos = 40;
 
             // Заголовки таблицы
-            gfx.DrawRectangle(XBrushes.LightGray, new XRect(60, yPos, 640, 30)); // фон для заголовков
+            gfx.DrawRectangle(XBrushes.LightGray, new XRect(60, yPos, 700, 30)); // фон для заголовков
             gfx.DrawString("Группа", headerFont, XBrushes.Black, new XRect(60, yPos, 100, 20), XStringFormats.Center);
             gfx.DrawString("Время", headerFont, XBrushes.Black, new XRect(160, yPos, 100, 20), XStringFormats.Center);
             gfx.DrawString("Предмет", headerFont, XBrushes.Black, new XRect(260, yPos, 100, 20), XStringFormats.Center);
             gfx.DrawString("Класс", headerFont, XBrushes.Black, new XRect(360, yPos, 100, 20), XStringFormats.Center);
             gfx.DrawString("Учителя", headerFont, XBrushes.Black, new XRect(460, yPos, 100, 20), XStringFormats.Center);
             gfx.DrawString("День недели", headerFont, XBrushes.Black, new XRect(560, yPos, 100, 20), XStringFormats.Center);
+            gfx.DrawString("Неделя", headerFont, XBrushes.Black, new XRect(660, yPos, 100, 20), XStringFormats.Center);
             yPos += 30;
 
             // Добавляем данные расписания
@@ -64,7 +65,7 @@ namespace SheldulePro.Application
                 XBrush backgroundBrush = (rowCount % 2 == 0) ? XBrushes.LightSeaGreen : XBrushes.LightGreen; // Чередуем цвета
 
                 // Рисуем прямоугольник для фона строки
-                gfx.DrawRectangle(backgroundBrush, new XRect(60, yPos, 640, 20));
+                gfx.DrawRectangle(backgroundBrush, new XRect(60, yPos, 700, 20));
 
                 gfx.DrawString(string.Join(", ", schedule.Group.Select(g => g.Name)), contentFont, XBrushes.Black, new XRect(60, yPos, 100, 20), XStringFormats.Center);
                 gfx.DrawString(schedule.ClassTime.Number.ToString() + " - " + schedule.ClassTime.StartTime.ToString(), contentFont, XBrushes.Black, new XRect(160, yPos, 100, 20), XStringFormats.Center);
@@ -72,6 +73,7 @@ namespace SheldulePro.Application
                 gfx.DrawString(schedule.Classroom?.Number ?? "Не указано", contentFont, XBrushes.Black, new XRect(360, yPos, 100, 20), XStringFormats.Center);
                 gfx.DrawString(string.Join(", ", schedule.Teacher.Select(t => t.Name)), contentFont, XBrushes.Black, new XRect(460, yPos, 100, 20), XStringFormats.Center);
                 gfx.DrawString(schedule.DayOfWeek.ToString(), contentFont, XBrushes.Black, new XRect(560, yPos, 100, 20), XStringFormats.Center);
+                gfx.DrawString(schedule.Week.Number.ToString(), contentFont, XBrushes.Black, new XRect(660, yPos, 100, 20), XStringFormats.Center);
                 yPos += 20;
                 rowCount++;
                 // Если места не хватает, добавляем новую страницу
@@ -88,6 +90,7 @@ namespace SheldulePro.Application
                     gfx.DrawString("Класс", headerFont, XBrushes.Black, new XRect(360, yPos, 100, 20), XStringFormats.Center);
                     gfx.DrawString("Учителя", headerFont, XBrushes.Black, new XRect(460, yPos, 100, 20), XStringFormats.Center);
                     gfx.DrawString("День недели", headerFont, XBrushes.Black, new XRect(560, yPos, 100, 20), XStringFormats.Center);
+                    gfx.DrawString("Неделя", headerFont, XBrushes.Black, new XRect(660, yPos, 100, 20), XStringFormats.Center); ;
                     yPos += 30;
                 }
             }
@@ -162,10 +165,8 @@ namespace SheldulePro.Application
         // Создание нового расписания
         public async Task<Schedule> Create(Schedule entity)
         {
-            // Убедитесь, что все внешние сущности существуют
-            await LoadDependencies(entity);
 
-            await _context.Schedules.AddAsync(entity);
+             _context.Schedules.Attach(entity);
             await _context.SaveChangesAsync();
             return entity;
         }

@@ -45,12 +45,12 @@ namespace SheldulePro
             WeekBox.DisplayMember = "Number";
             WeekBox.ValueMember = "Id";
 
-            
+
             GroupBox.DataSource = groupTask.Result;
             GroupBox.DisplayMember = "Name";
             GroupBox.ValueMember = "Id";
 
-        
+
             TeachersBoxNew.DataSource = teacherTask.Result;
             TeachersBoxNew.DisplayMember = "Name";
             TeachersBoxNew.ValueMember = "Id";
@@ -75,7 +75,7 @@ namespace SheldulePro
 
             TypeSubjectNewBox.DataSource = Enum.GetValues(typeof(SubjectType)); // Привязка enum
             DayBox.DataSource = Enum.GetValues(typeof(DayOfWeekEnum));
-           
+
 
             RoomBoxNew.DataSource = roomTask.Result
                  .Select(r => new
@@ -155,10 +155,16 @@ namespace SheldulePro
         }
         #endregion
 
+       
         private async void WeekBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            await Search();
+        }
+
+        private async Task Search()
+        {
             var selectedGroups = GroupBox.SelectedItems.Cast<StudentGroup>().Select(s => s.Id).ToList();
-   
+
             // Обработка конвертации для WeekBox
             if (!int.TryParse(WeekBox.SelectedValue?.ToString(), out int selectedWeekId))
             {
@@ -175,12 +181,12 @@ namespace SheldulePro
             }
 
             // Обработка конвертации для GroupBox
-            if (selectedGroups is null)
+            if (selectedGroups.Count == 0)
             {
 
                 return;
             }
-           
+
 
             try
             {
@@ -210,7 +216,7 @@ namespace SheldulePro
             }
             catch (Exception ex)
             {
-             
+
             }
         }
 
@@ -218,17 +224,26 @@ namespace SheldulePro
         {
             // Получение выбранных значений из ComboBox
             var selectedWeekId = (int)WeekBox.SelectedValue;
-   
+
             var selectedTimeId = (int)TimeBoxNew.SelectedValue;
             var selectedSubjectId = (int)SubjectBoxNew.SelectedValue;
             var selectedTypeSubject = (SubjectType)TypeSubjectNewBox.SelectedItem; // Используем тип перечисления
-       
+
             var selectedRoomId = (int)RoomBoxNew.SelectedValue;
             var selectedDay = (DayOfWeekEnum)DayBox.SelectedValue; // Получаем значение из DayBox
 
             var selectedGroups = GroupBox.SelectedItems.Cast<StudentGroup>().ToList();
             var selectedTeachers = TeachersBoxNew.SelectedItems.Cast<Teacher>().ToList();
-
+            if (selectedGroups.Count == 0)
+            {
+                MessageBox.Show("Группы не выбраны");
+                return;
+            }
+            if (selectedTeachers.Count == 0)
+            {
+                MessageBox.Show("Учителя не выбраны");
+                return;
+            }
             var newSchedule = new Schedule
             {
                 Group = selectedGroups,
@@ -248,7 +263,7 @@ namespace SheldulePro
             else
             {
                 await _scheduleService.Create(newSchedule);
-                await LoadComboBoxesAsync();
+                await Search();
             }
         }
 
@@ -284,10 +299,36 @@ namespace SheldulePro
                 };
                 await _scheduleService.Delete(schedule);
 
-                await LoadComboBoxesAsync();
+                await Search();
             }
         }
 
-        
+        private async void AllBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var schedules = await _scheduleService.GetList();
+                var filteredSchedules = schedules
+                       .Select(s => new
+                       {
+                           Id = s.Id,
+                           Неделя = s.Week.Number,
+                           Группы = string.Join(", ", s.Group.Select(t => t.Name)),
+                           Время = s.ClassTime.Number + " " + s.ClassTime.StartTime.ToString() + " - " + s.ClassTime.EndTime.ToString(),  // Время занятия
+                           Предмет = s.Subject.Name,            // Предмет
+                           Тип = s.SubjectType.ToString(),      // Тип предмета
+                           Учитель = string.Join(", ", s.Teacher.Select(t => t.Name)),  // Преподаватели через запятую
+                           Кабинет = s.Classroom.Number         // Аудитория
+                       })
+                       .ToList();
+                ShelduleGrid.DataSource = filteredSchedules;
+            }
+            catch (Exception)
+            {
+
+               
+            }
+           
+        }
     }
 }

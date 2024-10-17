@@ -56,6 +56,7 @@ namespace SheldulePro
             DeleteShuduleBtn = new Button();
             GroupBox = new ListBox();
             TeachersBoxNew = new ListBox();
+            AllBtn = new Button();
             toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ShelduleGrid).BeginInit();
             SuspendLayout();
@@ -310,11 +311,22 @@ namespace SheldulePro
             TeachersBoxNew.Size = new Size(444, 214);
             TeachersBoxNew.TabIndex = 32;
             // 
+            // AllBtn
+            // 
+            AllBtn.Location = new Point(12, 139);
+            AllBtn.Name = "AllBtn";
+            AllBtn.Size = new Size(272, 36);
+            AllBtn.TabIndex = 33;
+            AllBtn.Text = "Всё расписание";
+            AllBtn.UseVisualStyleBackColor = true;
+            AllBtn.Click += AllBtn_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1209, 716);
+            Controls.Add(AllBtn);
             Controls.Add(TeachersBoxNew);
             Controls.Add(GroupBox);
             Controls.Add(DeleteShuduleBtn);
@@ -380,5 +392,6 @@ namespace SheldulePro
         private ToolStripButton toolReport;
         private ListBox GroupBox;
         private ListBox TeachersBoxNew;
+        private Button AllBtn;
     }
 }

@@ -38,7 +38,7 @@ namespace SheldulePro
                     listBox.Font = new Font("Segoe UI", 10, FontStyle.Regular);
                     listBox.BorderStyle = BorderStyle.FixedSingle;
 
-                  
+                
                     listBox.DrawItem += (sender, e) =>
                     {
                         if (e.Index < 0) return;
